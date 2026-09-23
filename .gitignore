@@ -1,0 +1,48 @@
+# =====================================================================
+# State Street Specific Information & Mock Data Exclusions
+# =====================================================================
+
+# Database records and mock data payloads
+*.json
+!api/openapi.json
+!agent/**/app.json
+!agent/**/deployments.json
+!agent/**/agent.json
+!agent/**/tools/*.json
+
+# Explicitly ignore mock datasets
+api/data/*.json
+api/data/statestreet_mock_data.json
+api/data/auth_mock_data.json
+
+# Client spreadsheets, documents, and emails
+*.xlsx
+*.xls
+*.docx
+*.doc
+*.pdf
+all_messages.json
+Stakeholders_list_and_Matrix.xlsx
+AI_Contact_Center_Plan.xlsx
+GCEX_Mock_Data_CUJ_Aligned_Agentic_Discovery_Reconciled.xlsx
+GECX_Mock_Data_Authentication_1.xlsx
+Recommended_Top_Customer_Journeys_POC_Updated_09.14.2026.docx
+Top10_Questions_V2.pdf
+
+# Credentials, secret keys, tokens & logs
+*.key
+*.pem
+*sa-key*.json
+*.log
+portal/server.log
+portal/uploads/*
+!portal/uploads/.gitkeep
+
+# Python cache & virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+*.tar.gz
+.backups/

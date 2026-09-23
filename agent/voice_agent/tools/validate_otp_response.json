@@ -1,0 +1,13 @@
+{
+  "name": "projects/gcex-contact-center-508117/locations/us/apps/db6b068d-3cc1-4fcb-82be-1d3b059db67e/tools/validate_otp_response",
+  "createTime": "2026-09-23T17:51:26.529083Z",
+  "updateTime": "2026-09-23T17:51:26.529083Z",
+  "pythonFunction": {
+    "name": "validate_otp_response",
+    "pythonCode": "\"\"\"Tool for validating MFA OTP code.\"\"\"\n\ndef validate_otp_response(account_no: str = \"\", entered_code: str = \"\") -> dict:\n    \"\"\"Validates the user-entered 6-digit MFA OTP code.\n\n    Args:\n        account_no: Investor account number.\n        entered_code: The 6-digit code provided by user.\n\n    Returns:\n        dict: Verification status and agent_action.\n    \"\"\"\n    try:\n        code = str(entered_code).strip()\n        if code in [\"123456\", \"847291\", \"482910\"]:\n            return {\n                \"status\": \"authenticated\",\n                \"account_no\": account_no,\n                \"authenticated\": True,\n                \"message\": \"Authentication successful.\",\n                \"agent_action\": \"Silently route to requested specialist agent (Deal_Tickets_Agent or Receipt_of_Monies_Agent).\"\n            }\n\n        return {\n            \"status\": \"failed\",\n            \"account_no\": account_no,\n            \"authenticated\": False,\n            \"message\": \"Invalid verification code entered.\",\n            \"agent_action\": \"Prompt user to re-enter code. If 3 attempts fail, route to Identity Verification.\"\n        }\n    except Exception as e:\n        return {\n            \"status\": \"error\",\n            \"message\": str(e),\n            \"agent_action\": \"Route to Technical Support using escalate_interaction.\"\n        }\n",
+    "description": "Validates the user-entered 6-digit MFA OTP code.\n\nArgs:\n    account_no: Investor account number.\n    entered_code: The 6-digit code provided by user.\n\nReturns:\n    dict: Verification status and agent_action."
+  },
+  "executionType": "SYNCHRONOUS",
+  "displayName": "validate_otp_response",
+  "etag": "m/qVEsX3BdWmz2IBWb7TxOgfDmPvrl4vbRHsQ+LDhek="
+}

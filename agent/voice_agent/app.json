@@ -1,0 +1,66 @@
+{
+  "name": "projects/gcex-contact-center-508117/locations/us/apps/db6b068d-3cc1-4fcb-82be-1d3b059db67e",
+  "displayName": "StateStreetVoiceDemo",
+  "description": "State Street Transfer Agency Voice Assistant with Hold Music",
+  "rootAgent": "projects/gcex-contact-center-508117/locations/us/apps/db6b068d-3cc1-4fcb-82be-1d3b059db67e/agents/StateStreetGECXDemo",
+  "createTime": "2026-09-23T17:49:00.987790Z",
+  "updateTime": "2026-09-23T17:56:02.272842Z",
+  "audioProcessingConfig": {
+    "synthesizeSpeechConfigs": {
+      "en-US": {}
+    }
+  },
+  "loggingSettings": {
+    "redactionConfig": {
+      "enableRedaction": true
+    },
+    "audioRecordingConfig": {},
+    "bigqueryExportSettings": {},
+    "cloudLoggingSettings": {
+      "enableCloudLogging": true
+    },
+    "conversationLoggingSettings": {
+      "retentionWindow": "31536000s"
+    },
+    "metricAnalysisSettings": {},
+    "unredactedBigqueryExportSettings": {}
+  },
+  "etag": "lPZhjLmgtOFIBlOg9G7WKp1mLCe1lZH8cmF1tqMN6lo=",
+  "modelSettings": {
+    "model": "gemini-3.1-flash-live"
+  },
+  "languageSettings": {
+    "defaultLanguageCode": "en-US"
+  },
+  "defaultChannelProfile": {},
+  "deploymentCount": 1,
+  "timeZoneSettings": {
+    "timeZone": "America/New_York"
+  },
+  "predefinedVariableDeclarations": [
+    {
+      "name": "current_date",
+      "description": "Current time represented in the ISO 8601 format along with its corresponding IANA Time Zone.",
+      "schema": {
+        "type": "STRING"
+      }
+    },
+    {
+      "name": "_session",
+      "description": "Contains session specific variables like modality and channel.",
+      "schema": {
+        "type": "OBJECT",
+        "properties": {
+          "modality": {
+            "type": "STRING"
+          },
+          "channel": {
+            "type": "STRING"
+          }
+        }
+      }
+    }
+  ],
+  "toolExecutionMode": "PARALLEL",
+  "errorHandlingSettings": {}
+}

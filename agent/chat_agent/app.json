@@ -1,0 +1,67 @@
+{
+  "name": "projects/gcex-contact-center-508117/locations/us/apps/954f9664-9865-4fdc-9ced-751589097442",
+  "displayName": "StateStreetGECXDemo",
+  "description": "State Street Transfer Agency AI Contact Center (GECX) - Omnichannel Assistant Tara for Authentication, Deal Tickets, and Receipt of Monies.",
+  "rootAgent": "projects/gcex-contact-center-508117/locations/us/apps/954f9664-9865-4fdc-9ced-751589097442/agents/StateStreetGECXDemo",
+  "createTime": "2026-09-21T23:47:35.176773Z",
+  "updateTime": "2026-09-23T19:38:16.671503Z",
+  "audioProcessingConfig": {
+    "synthesizeSpeechConfigs": {
+      "en-US": {}
+    }
+  },
+  "loggingSettings": {
+    "redactionConfig": {
+      "enableRedaction": true
+    },
+    "audioRecordingConfig": {},
+    "bigqueryExportSettings": {},
+    "cloudLoggingSettings": {
+      "enableCloudLogging": true
+    },
+    "conversationLoggingSettings": {
+      "retentionWindow": "31536000s"
+    },
+    "metricAnalysisSettings": {},
+    "unredactedBigqueryExportSettings": {}
+  },
+  "etag": "vHbVil9XPvwZIWwrk1i57KPxF8Jq4xMQ5Gtq10rUsI4=",
+  "modelSettings": {
+    "model": "gemini-3.7-flash",
+    "temperature": 1
+  },
+  "languageSettings": {
+    "defaultLanguageCode": "en-US"
+  },
+  "defaultChannelProfile": {},
+  "deploymentCount": 2,
+  "timeZoneSettings": {
+    "timeZone": "America/New_York"
+  },
+  "predefinedVariableDeclarations": [
+    {
+      "name": "current_date",
+      "description": "Current time represented in the ISO 8601 format along with its corresponding IANA Time Zone.",
+      "schema": {
+        "type": "STRING"
+      }
+    },
+    {
+      "name": "_session",
+      "description": "Contains session specific variables like modality and channel.",
+      "schema": {
+        "type": "OBJECT",
+        "properties": {
+          "modality": {
+            "type": "STRING"
+          },
+          "channel": {
+            "type": "STRING"
+          }
+        }
+      }
+    }
+  ],
+  "toolExecutionMode": "PARALLEL",
+  "errorHandlingSettings": {}
+}

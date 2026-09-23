@@ -1,0 +1,2108 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "State Street Transfer Agency Operations & AI Platform",
+    "description": "Live operational REST API powered by Firestore for GECX/CES Conversational Agent Tara and the State Street Operations Portal.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "summary": "Health Check",
+        "operationId": "health_check_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/accounts/{account_no}": {
+      "get": {
+        "tags": [
+          "Authentication & Profile"
+        ],
+        "summary": "Get Account Profile",
+        "description": "Retrieves account details and investor profile from the ZILO client master (Firestore: accounts).",
+        "operationId": "get_account_profile_api_v1_accounts__account_no__get",
+        "parameters": [
+          {
+            "name": "account_no",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Unique investor account number (e.g. ACC-1001)",
+              "title": "Account No"
+            },
+            "description": "Unique investor account number (e.g. ACC-1001)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/accounts/otp/issue": {
+      "post": {
+        "tags": [
+          "Authentication & Profile"
+        ],
+        "summary": "Issue Otp",
+        "description": "Issues a 6-digit MFA OTP challenge via Email or SMS.",
+        "operationId": "issue_otp_api_v1_accounts_otp_issue_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OtpIssueRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OtpIssueResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/accounts/otp/validate": {
+      "post": {
+        "tags": [
+          "Authentication & Profile"
+        ],
+        "summary": "Validate Otp",
+        "description": "Validates the user-entered 6-digit MFA OTP code.",
+        "operationId": "validate_otp_api_v1_accounts_otp_validate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OtpValidateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OtpValidateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/trades/discovery": {
+      "get": {
+        "tags": [
+          "Deal Tickets"
+        ],
+        "summary": "Agentic Discovery Deal Ticket",
+        "description": "Searches for trades by non-monetary clues with 2-clue privacy gate.",
+        "operationId": "agentic_discovery_deal_ticket_api_v1_trades_discovery_get",
+        "parameters": [
+          {
+            "name": "account_no",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Authenticated investor account number",
+              "title": "Account No"
+            },
+            "description": "Authenticated investor account number"
+          },
+          {
+            "name": "txn_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Transaction type: Subscription or Redemption",
+              "title": "Txn Type"
+            },
+            "description": "Transaction type: Subscription or Redemption"
+          },
+          {
+            "name": "fund_code",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Fund identifier or name keyword",
+              "title": "Fund Code"
+            },
+            "description": "Fund identifier or name keyword"
+          },
+          {
+            "name": "date_str",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Trade or order date (YYYY-MM-DD)",
+              "title": "Date Str"
+            },
+            "description": "Trade or order date (YYYY-MM-DD)"
+          },
+          {
+            "name": "amount_str",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Approximate dollar amount",
+              "title": "Amount Str"
+            },
+            "description": "Approximate dollar amount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiscoveryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/trades/{trade_ref}": {
+      "get": {
+        "tags": [
+          "Deal Tickets"
+        ],
+        "summary": "Get Trade Status",
+        "description": "Searches ZILO Works for deterministic trade execution status.",
+        "operationId": "get_trade_status_api_v1_trades__trade_ref__get",
+        "parameters": [
+          {
+            "name": "trade_ref",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Unique trade reference (e.g. TRD-5001)",
+              "title": "Trade Ref"
+            },
+            "description": "Unique trade reference (e.g. TRD-5001)"
+          },
+          {
+            "name": "account_no",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Authenticated investor account number for isolation check",
+              "title": "Account No"
+            },
+            "description": "Authenticated investor account number for isolation check"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TradeResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/work-items/{reference}": {
+      "get": {
+        "tags": [
+          "Deal Tickets"
+        ],
+        "summary": "Get Work Item",
+        "description": "Searches ZILO Work Items by Work Item ID or Trade Reference for document indexing (DINDEX) or NIGO exceptions.",
+        "operationId": "get_work_item_api_v1_work_items__reference__get",
+        "parameters": [
+          {
+            "name": "reference",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Unique work item ID (WI-3001) or Trade Ref (TRD-5003, TRD-5004)",
+              "title": "Reference"
+            },
+            "description": "Unique work item ID (WI-3001) or Trade Ref (TRD-5003, TRD-5004)"
+          },
+          {
+            "name": "account_no",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Authenticated investor account number",
+              "title": "Account No"
+            },
+            "description": "Authenticated investor account number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkItemResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bank-rec/{trade_ref}": {
+      "get": {
+        "tags": [
+          "Receipt of Monies"
+        ],
+        "summary": "Get Bank Rec",
+        "description": "Queries Bank Reconciliation system for cash receipt match status.",
+        "operationId": "get_bank_rec_api_v1_bank_rec__trade_ref__get",
+        "parameters": [
+          {
+            "name": "trade_ref",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Unique trade reference (e.g. TRD-5010, TRD-5012)",
+              "title": "Trade Ref"
+            },
+            "description": "Unique trade reference (e.g. TRD-5010, TRD-5012)"
+          },
+          {
+            "name": "account_no",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Authenticated investor account number",
+              "title": "Account No"
+            },
+            "description": "Authenticated investor account number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankRecResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/settlement/inquiry/{trade_ref}": {
+      "get": {
+        "tags": [
+          "Receipt of Monies"
+        ],
+        "summary": "Execute Settlement Inquiry",
+        "description": "Comprehensive settlement evaluation across ZILO Trades, Bank Rec, and SUBNR.",
+        "operationId": "execute_settlement_inquiry_api_v1_settlement_inquiry__trade_ref__get",
+        "parameters": [
+          {
+            "name": "trade_ref",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Unique trade reference",
+              "title": "Trade Ref"
+            },
+            "description": "Unique trade reference"
+          },
+          {
+            "name": "account_no",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Authenticated investor account number",
+              "title": "Account No"
+            },
+            "description": "Authenticated investor account number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SettlementInquiryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/escalations": {
+      "post": {
+        "tags": [
+          "Escalations"
+        ],
+        "summary": "Escalate Interaction",
+        "description": "Transfers the interaction to one of the 6 specialized escalation queues.",
+        "operationId": "escalate_interaction_api_v1_escalations_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EscalateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EscalateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/accounts": {
+      "get": {
+        "tags": [
+          "Portal Operations"
+        ],
+        "summary": "List Accounts",
+        "operationId": "list_accounts_api_accounts_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Portal Operations"
+        ],
+        "summary": "Create Account",
+        "operationId": "create_account_api_accounts_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Data"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/accounts/{account_no}": {
+      "put": {
+        "tags": [
+          "Portal Operations"
+        ],
+        "summary": "Update Account",
+        "operationId": "update_account_api_accounts__account_no__put",
+        "parameters": [
+          {
+            "name": "account_no",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Account No"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true,
+                "title": "Data"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/trades": {
+      "get": {
+        "tags": [
+          "Portal Operations"
+        ],
+        "summary": "List Trades",
+        "operationId": "list_trades_api_trades_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Portal Operations"
+        ],
+        "summary": "Create Trade",
+        "operationId": "create_trade_api_trades_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Data"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/trades/{trade_ref}": {
+      "put": {
+        "tags": [
+          "Portal Operations"
+        ],
+        "summary": "Update Trade",
+        "operationId": "update_trade_api_trades__trade_ref__put",
+        "parameters": [
+          {
+            "name": "trade_ref",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Trade Ref"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true,
+                "title": "Data"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/work-items": {
+      "get": {
+        "tags": [
+          "Portal Operations"
+        ],
+        "summary": "List Work Items",
+        "operationId": "list_work_items_api_work_items_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Portal Operations"
+        ],
+        "summary": "Create Work Item",
+        "operationId": "create_work_item_api_work_items_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Data"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/work-items/{work_item_id}": {
+      "put": {
+        "tags": [
+          "Portal Operations"
+        ],
+        "summary": "Update Work Item",
+        "operationId": "update_work_item_api_work_items__work_item_id__put",
+        "parameters": [
+          {
+            "name": "work_item_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Work Item Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true,
+                "title": "Data"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/bank-rec": {
+      "get": {
+        "tags": [
+          "Portal Operations"
+        ],
+        "summary": "List Bank Rec",
+        "operationId": "list_bank_rec_api_bank_rec_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Portal Operations"
+        ],
+        "summary": "Create Bank Rec",
+        "operationId": "create_bank_rec_api_bank_rec_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Data"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/bank-rec/{trade_ref}": {
+      "put": {
+        "tags": [
+          "Portal Operations"
+        ],
+        "summary": "Update Bank Rec",
+        "operationId": "update_bank_rec_api_bank_rec__trade_ref__put",
+        "parameters": [
+          {
+            "name": "trade_ref",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Trade Ref"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true,
+                "title": "Data"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/stats": {
+      "get": {
+        "tags": [
+          "Portal Operations"
+        ],
+        "summary": "Get Stats",
+        "operationId": "get_stats_api_stats_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/reset": {
+      "post": {
+        "tags": [
+          "Portal Operations"
+        ],
+        "summary": "Reset Database",
+        "description": "Resets Firestore database 'statestreet' to the authoritative baseline mock data.",
+        "operationId": "reset_database_api_reset_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/chat": {
+      "post": {
+        "tags": [
+          "AI Chat Assistant"
+        ],
+        "summary": "Chat With Agent",
+        "description": "Executes a live conversational turn against the deployed CES Agent 'StateStreetGECXDemo'.",
+        "operationId": "chat_with_agent_api_chat_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AccountResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "default": "found"
+          },
+          "account_no": {
+            "type": "string",
+            "title": "Account No"
+          },
+          "account_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Account Name"
+          },
+          "investor_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Investor Name"
+          },
+          "registered_email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Registered Email"
+          },
+          "registered_phone": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Registered Phone"
+          },
+          "phone_verified": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Phone Verified",
+            "default": "No"
+          },
+          "account_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Account Status",
+            "default": "Active"
+          },
+          "auth_profile_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Auth Profile Id"
+          },
+          "allowed_otp_route": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Allowed Otp Route"
+          },
+          "eligibility_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Eligibility Note"
+          },
+          "agent_action": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Agent Action"
+          }
+        },
+        "type": "object",
+        "required": [
+          "account_no"
+        ],
+        "title": "AccountResponse"
+      },
+      "BankRecResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "trade_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trade Ref"
+          },
+          "bank_rec_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bank Rec Status"
+          },
+          "subnr": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subnr"
+          },
+          "cash_received_amount": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cash Received Amount"
+          },
+          "rec_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rec Date"
+          },
+          "settlement_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Settlement Date"
+          },
+          "sd_plus_days": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sd Plus Days",
+            "default": 0
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message"
+          },
+          "agent_action": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Agent Action"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "BankRecResponse"
+      },
+      "ChatRequest": {
+        "properties": {
+          "session_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Session Id"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "title": "ChatRequest"
+      },
+      "ChatResponse": {
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "reply": {
+            "type": "string",
+            "title": "Reply"
+          },
+          "agent": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Agent"
+          },
+          "transfer": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Transfer"
+          },
+          "tool_calls": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Tool Calls",
+            "default": []
+          },
+          "tool_responses": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Tool Responses",
+            "default": []
+          },
+          "latency_ms": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latency Ms"
+          }
+        },
+        "type": "object",
+        "required": [
+          "session_id",
+          "reply"
+        ],
+        "title": "ChatResponse"
+      },
+      "DiscoveryCandidate": {
+        "properties": {
+          "masked_trade_ref": {
+            "type": "string",
+            "title": "Masked Trade Ref"
+          },
+          "transaction_type": {
+            "type": "string",
+            "title": "Transaction Type"
+          },
+          "fund_name": {
+            "type": "string",
+            "title": "Fund Name"
+          },
+          "trade_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trade Date"
+          },
+          "masked_amount": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Masked Amount"
+          }
+        },
+        "type": "object",
+        "required": [
+          "masked_trade_ref",
+          "transaction_type",
+          "fund_name"
+        ],
+        "title": "DiscoveryCandidate"
+      },
+      "DiscoveryResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count",
+            "default": 0
+          },
+          "candidates": {
+            "items": {
+              "$ref": "#/components/schemas/DiscoveryCandidate"
+            },
+            "type": "array",
+            "title": "Candidates",
+            "default": []
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message"
+          },
+          "agent_action": {
+            "type": "string",
+            "title": "Agent Action"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "agent_action"
+        ],
+        "title": "DiscoveryResponse"
+      },
+      "EscalateRequest": {
+        "properties": {
+          "account_no": {
+            "type": "string",
+            "title": "Account No"
+          },
+          "target_queue": {
+            "type": "string",
+            "title": "Target Queue"
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason"
+          },
+          "context_summary": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Context Summary",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "required": [
+          "account_no",
+          "target_queue",
+          "reason"
+        ],
+        "title": "EscalateRequest"
+      },
+      "EscalateResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "account_no": {
+            "type": "string",
+            "title": "Account No"
+          },
+          "target_queue": {
+            "type": "string",
+            "title": "Target Queue"
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason"
+          },
+          "transfer_mode": {
+            "type": "string",
+            "title": "Transfer Mode",
+            "default": "WARM_TRANSFER"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "agent_action": {
+            "type": "string",
+            "title": "Agent Action"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "account_no",
+          "target_queue",
+          "reason",
+          "message",
+          "agent_action"
+        ],
+        "title": "EscalateResponse"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "OtpIssueRequest": {
+        "properties": {
+          "account_no": {
+            "type": "string",
+            "title": "Account No"
+          },
+          "channel": {
+            "type": "string",
+            "title": "Channel",
+            "description": "'chat' (email) or 'voice' (sms)",
+            "default": "chat"
+          },
+          "target_contact": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Contact"
+          }
+        },
+        "type": "object",
+        "required": [
+          "account_no"
+        ],
+        "title": "OtpIssueRequest"
+      },
+      "OtpIssueResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "account_no": {
+            "type": "string",
+            "title": "Account No"
+          },
+          "channel": {
+            "type": "string",
+            "title": "Channel"
+          },
+          "target_contact_masked": {
+            "type": "string",
+            "title": "Target Contact Masked"
+          },
+          "otp_length": {
+            "type": "integer",
+            "title": "Otp Length",
+            "default": 6
+          },
+          "validity_minutes": {
+            "type": "integer",
+            "title": "Validity Minutes",
+            "default": 5
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "agent_action": {
+            "type": "string",
+            "title": "Agent Action"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "account_no",
+          "channel",
+          "target_contact_masked",
+          "message",
+          "agent_action"
+        ],
+        "title": "OtpIssueResponse"
+      },
+      "OtpValidateRequest": {
+        "properties": {
+          "account_no": {
+            "type": "string",
+            "title": "Account No"
+          },
+          "entered_code": {
+            "type": "string",
+            "title": "Entered Code"
+          }
+        },
+        "type": "object",
+        "required": [
+          "account_no",
+          "entered_code"
+        ],
+        "title": "OtpValidateRequest"
+      },
+      "OtpValidateResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "account_no": {
+            "type": "string",
+            "title": "Account No"
+          },
+          "authenticated": {
+            "type": "boolean",
+            "title": "Authenticated"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "agent_action": {
+            "type": "string",
+            "title": "Agent Action"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "account_no",
+          "authenticated",
+          "message",
+          "agent_action"
+        ],
+        "title": "OtpValidateResponse"
+      },
+      "SettlementInquiryResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "trade_ref": {
+            "type": "string",
+            "title": "Trade Ref"
+          },
+          "zilo_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Zilo Status"
+          },
+          "bank_rec_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bank Rec Status"
+          },
+          "subnr": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subnr"
+          },
+          "amount": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount"
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Currency",
+            "default": "USD"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "agent_action": {
+            "type": "string",
+            "title": "Agent Action"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "trade_ref",
+          "message",
+          "agent_action"
+        ],
+        "title": "SettlementInquiryResponse"
+      },
+      "TradeResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "trade_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trade Ref"
+          },
+          "trade_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trade Status"
+          },
+          "fund_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fund Name"
+          },
+          "transaction_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Transaction Type"
+          },
+          "gross_amount": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gross Amount"
+          },
+          "trade_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trade Date"
+          },
+          "nav_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nav Date"
+          },
+          "settlement_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Settlement Date"
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Currency",
+            "default": "USD"
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message"
+          },
+          "agent_action": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Agent Action"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "TradeResponse"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "WorkItemResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "trade_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trade Ref"
+          },
+          "work_item_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Work Item Id"
+          },
+          "work_item_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Work Item Status"
+          },
+          "queue_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Queue Name"
+          },
+          "sla": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sla"
+          },
+          "nigo_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nigo Reason"
+          },
+          "action_needed": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Action Needed"
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message"
+          },
+          "agent_action": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Agent Action"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "WorkItemResponse"
+      }
+    }
+  }
+}

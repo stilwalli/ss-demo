@@ -1,0 +1,13 @@
+{
+  "name": "projects/gcex-contact-center-508117/locations/us/apps/db6b068d-3cc1-4fcb-82be-1d3b059db67e/tools/escalate_interaction",
+  "createTime": "2026-09-23T17:51:26.811072Z",
+  "updateTime": "2026-09-23T17:51:26.811072Z",
+  "pythonFunction": {
+    "name": "escalate_interaction",
+    "pythonCode": "\"\"\"Tool for routing to specialized escalation queues.\"\"\"\n\ndef escalate_interaction(account_no: str = \"\", target_queue: str = \"\", reason: str = \"\", context_summary: str = \"\") -> dict:\n    \"\"\"Transfers the interaction to one of the 6 specialized escalation queues.\n\n    Args:\n        account_no: Investor account number.\n        target_queue: Destination queue (Identity Verification, Security, Technical Support, Account Management, Cash Management, Investor Services (Human)).\n        reason: Justification for transfer.\n        context_summary: Brief factual summary of interaction context.\n\n    Returns:\n        dict: Routing status and agent_action.\n    \"\"\"\n    try:\n        valid_queues = [\n            \"Identity Verification\",\n            \"Security\",\n            \"Technical Support\",\n            \"Account Management\",\n            \"Cash Management\",\n            \"Investor Services (Human)\"\n        ]\n        q = target_queue if target_queue in valid_queues else \"Investor Services (Human)\"\n        return {\n            \"status\": \"escalation_initiated\",\n            \"account_no\": account_no,\n            \"target_queue\": q,\n            \"reason\": reason,\n            \"transfer_mode\": \"WARM_TRANSFER\",\n            \"message\": f\"Interaction routed to {q}.\",\n            \"agent_action\": f\"Provide professional transition statement to caller connecting to {q}.\"\n        }\n    except Exception as e:\n        return {\n            \"status\": \"error\",\n            \"message\": str(e),\n            \"agent_action\": \"Route to Technical Support immediately.\"\n        }\n",
+    "description": "Transfers the interaction to one of the 6 specialized escalation queues.\n\nArgs:\n    account_no: Investor account number.\n    target_queue: Destination queue (Identity Verification, Security, Technical Support, Account Management, Cash Management, Investor Services (Human)).\n    reason: Justification for transfer.\n    context_summary: Brief factual summary of interaction context.\n\nReturns:\n    dict: Routing status and agent_action."
+  },
+  "executionType": "SYNCHRONOUS",
+  "displayName": "escalate_interaction",
+  "etag": "WhuYYY9PcaQAUoeglp5kTmIEGfrxwSiTfrjxB0MVtGA="
+}

@@ -1,0 +1,13 @@
+{
+  "name": "projects/gcex-contact-center-508117/locations/us/apps/954f9664-9865-4fdc-9ced-751589097442/tools/search_bank_rec",
+  "createTime": "2026-09-23T16:57:25.896386Z",
+  "updateTime": "2026-09-23T16:57:25.896386Z",
+  "pythonFunction": {
+    "name": "search_bank_rec",
+    "pythonCode": "\"\"\"Tool for checking bank reconciliation cash receipts.\"\"\"\n\ndef search_bank_rec(account_no: str = \"\", trade_ref: str = \"\") -> dict:\n    \"\"\"Queries Bank Reconciliation system for cash receipt match status.\n\n    Args:\n        account_no: Investor account number.\n        trade_ref: Unique trade reference ID.\n\n    Returns:\n        dict: Bank rec matching status, SUBNR flag, and agent_action.\n    \"\"\"\n    try:\n        ref = str(trade_ref).strip().upper()\n        recs = {\n            \"TRD-5010\": {\"bank_rec_status\": \"Matched\", \"subnr\": \"No\", \"cash_received\": 2000000.00, \"rec_date\": \"2026-09-18\"},\n            \"TRD-5011\": {\"bank_rec_status\": \"Unmatched\", \"subnr\": \"No\", \"cash_received\": 0.0, \"rec_date\": \"2026-09-21\"},\n            \"TRD-5012\": {\"bank_rec_status\": \"Unmatched\", \"subnr\": \"Yes\", \"cash_received\": 0.0, \"rec_date\": \"2026-09-21\", \"sd_plus_days\": 1}\n        }\n\n        if ref in recs:\n            r = recs[ref]\n            return {\n                \"status\": \"found\",\n                \"trade_ref\": ref,\n                \"bank_rec_status\": r[\"bank_rec_status\"],\n                \"subnr\": r[\"subnr\"],\n                \"cash_received_amount\": r[\"cash_received\"],\n                \"agent_action\": \"If Matched report monies received; if Unmatched and SUBNR:Yes escalate to Cash Management.\"\n            }\n\n        return {\n            \"status\": \"not_found\",\n            \"message\": f\"No bank rec record found for {ref}.\",\n            \"agent_action\": \"Confirm trade settlement date or escalate to Cash Management.\"\n        }\n    except Exception as e:\n        return {\n            \"status\": \"error\",\n            \"message\": str(e),\n            \"agent_action\": \"Route to Technical Support using escalate_interaction.\"\n        }\n",
+    "description": "Queries Bank Reconciliation system for cash receipt match status.\n\nArgs:\n    account_no: Investor account number.\n    trade_ref: Unique trade reference ID.\n\nReturns:\n    dict: Bank rec matching status, SUBNR flag, and agent_action."
+  },
+  "executionType": "SYNCHRONOUS",
+  "displayName": "search_bank_rec",
+  "etag": "IEyon9ma8RCr6QaA1qFjvypEanzUe0Z/w6AV+kSiUSQ="
+}

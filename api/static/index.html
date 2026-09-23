@@ -1,0 +1,3075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>State Street | Transfer Agency Operations & AI Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --stt-navy: #020b5b;
+      --stt-dark-navy: #01062b;
+      --stt-electric-blue: #001aff;
+      --stt-hover-blue: #0014cc;
+      --stt-light-blue: #eef3ff;
+      --stt-ice-bg: #eff4f7;
+      --stt-bg: #f8fafc;
+      --stt-white: #ffffff;
+      --stt-text-dark: #091b23;
+      --stt-text-muted: #5c6670;
+      --stt-border: #d8d8d8;
+      --stt-border-light: #e5e9ec;
+      --stt-success-bg: #e6f7f2;
+      --stt-success-text: #1a6e55;
+      --stt-warning-bg: #fff8e1;
+      --stt-warning-text: #8c6b00;
+      --stt-danger-bg: #fde8e8;
+      --stt-danger-text: #a6100f;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Inter", Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      background-color: var(--stt-ice-bg);
+      color: var(--stt-text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+      width: 100%;
+    }
+
+    /* ==========================================================================
+       LOGIN VIEW (Statestreet.com style)
+       ========================================================================== */
+    #login-view {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: #f7fafc;
+    }
+
+    .login-top-bar {
+      background-color: #ffffff;
+      border-bottom: 1px solid var(--stt-border);
+      padding: 1.25rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .login-main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.5rem;
+    }
+
+    .login-card {
+      background: #ffffff;
+      border: 1px solid var(--stt-border);
+      width: 100%;
+      max-width: 460px;
+      padding: 2.75rem 2.5rem;
+      box-shadow: 0 4px 20px rgba(2, 11, 91, 0.06);
+    }
+
+    .login-card-header {
+      margin-bottom: 2rem;
+    }
+
+    .login-badge {
+      font-size: 0.725rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--stt-electric-blue);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .login-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--stt-navy);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .login-subtitle {
+      font-size: 0.875rem;
+      color: var(--stt-text-muted);
+      margin-top: 0.5rem;
+      line-height: 1.45;
+    }
+
+    .login-form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .login-form-group label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--stt-navy);
+      margin-bottom: 0.4rem;
+    }
+
+    .login-input {
+      width: 100%;
+      padding: 0.75rem 0.9rem;
+      border: 1px solid var(--stt-border);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      background-color: #ffffff;
+    }
+
+    .login-input:focus {
+      border-color: var(--stt-electric-blue);
+      box-shadow: 0 0 0 2px rgba(0, 26, 255, 0.12);
+    }
+
+    .login-error {
+      background-color: var(--stt-danger-bg);
+      color: var(--stt-danger-text);
+      font-size: 0.8rem;
+      padding: 0.6rem 0.85rem;
+      margin-bottom: 1.25rem;
+      border-left: 3px solid var(--stt-danger-text);
+      display: none;
+    }
+
+    .btn-login-submit {
+      width: 100%;
+      background-color: var(--stt-navy);
+      color: #ffffff;
+      border: 1px solid var(--stt-navy);
+      padding: 0.85rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 0.5rem;
+    }
+
+    .btn-login-submit:hover {
+      background-color: var(--stt-electric-blue);
+      border-color: var(--stt-electric-blue);
+    }
+
+
+    /* ==========================================================================
+       APP VIEW (Authenticated State Street Portal)
+       ========================================================================== */
+    /* Unified Global Container for exact same width across all sections */
+    .stt-container {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 0 2.5rem;
+      box-sizing: border-box;
+    }
+
+    #app-view {
+      display: none;
+      flex-direction: column;
+      min-height: 100vh;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+
+    /* 1. Global Utility Header */
+    .ssmp-header__global-nav {
+      background-color: #ffffff;
+      border-bottom: 1px solid var(--stt-border-light);
+      font-size: 0.75rem;
+      padding: 0.5rem 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .ssmp-global-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--stt-text-muted);
+    }
+
+    .ssmp-global-left {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .ssmp-clr-item {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-weight: 500;
+      color: var(--stt-text-muted);
+    }
+
+    .ssmp-global-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .user-pill {
+      font-weight: 600;
+      color: var(--stt-navy);
+      background-color: #f1f5f9;
+      padding: 0.2rem 0.65rem;
+      border: 1px solid var(--stt-border);
+    }
+
+    .btn-logout {
+      background: none;
+      border: none;
+      color: var(--stt-danger-text);
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    .status-badge-cloud {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(26, 110, 85, 0.08);
+      color: #1a6e55;
+      padding: 0.2rem 0.65rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 0.7rem;
+      border: 1px solid rgba(26, 110, 85, 0.2);
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      background-color: #1a6e55;
+      border-radius: 50%;
+      box-shadow: 0 0 5px #1a6e55;
+    }
+
+    /* 2. Primary Navigation Bar with 2 Core Top-Level Tabs */
+    .ssmp-header {
+      background-color: var(--stt-white);
+      height: 82px;
+      padding: 0;
+      border-bottom: 1px solid var(--stt-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .ssmp-header-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .ssmp-header__logo-row {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .ssmp-logo-img {
+      height: 42px;
+      width: auto;
+      display: block;
+    }
+
+    /* Top-Level Tabs: Operations vs. AI Chat Assistant */
+    .ssmp-nav-tabs {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      list-style: none;
+    }
+
+    .ssmp-nav-tab-btn {
+      background: none;
+      border: none;
+      color: var(--stt-navy);
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 0.75rem 1.4rem;
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: color 0.15s ease;
+    }
+
+    .ssmp-nav-tab-btn:hover {
+      color: var(--stt-electric-blue);
+    }
+
+    .ssmp-nav-tab-btn.active {
+      color: var(--stt-electric-blue);
+      font-weight: 700;
+    }
+
+    .ssmp-nav-tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -23px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background-color: var(--stt-electric-blue);
+    }
+
+    .tab-badge {
+      font-size: 0.7rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 9999px;
+      background-color: #e5e9ec;
+      color: var(--stt-text-muted);
+    }
+
+    .ssmp-nav-tab-btn.active .tab-badge {
+      background-color: var(--stt-light-blue);
+      color: var(--stt-electric-blue);
+    }
+
+    .ssmp-header__actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .btn-reset-demo {
+      background-color: transparent;
+      color: var(--stt-navy);
+      border: 1px solid var(--stt-border);
+      padding: 0.55rem 1.1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-reset-demo:hover {
+      background-color: #f1f5f9;
+      border-color: var(--stt-navy);
+    }
+
+    /* ==========================================================================
+       TAB 1: OPERATIONS CONTENT VIEW
+       ========================================================================== */
+    #tab-operations {
+      display: none;
+    }
+
+    /* Hero Strip */
+    .ssmp-enhanced-hero {
+      background-color: #ffffff;
+      border-bottom: 1px solid var(--stt-border);
+      padding: 3rem 0 3.5rem 0;
+      position: relative;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .ssmp-hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 480px;
+      gap: 3rem;
+      align-items: center;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .ssmp-hero-eyebrow {
+      color: var(--stt-electric-blue);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .ssmp-hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 16px;
+      height: 2px;
+      background-color: var(--stt-electric-blue);
+    }
+
+    .ssmp-hero-title {
+      font-size: 2.5rem;
+      line-height: 1.15;
+      font-weight: 700;
+      color: var(--stt-navy);
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .ssmp-hero-title span {
+      color: var(--stt-electric-blue);
+    }
+
+    .ssmp-hero-subhead {
+      font-size: 1.05rem;
+      line-height: 1.55;
+      color: var(--stt-text-muted);
+      margin-bottom: 1.75rem;
+      font-weight: 400;
+      max-width: 640px;
+    }
+
+    .ssmp-hero-cta-group {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .ssmp-btn-solid {
+      background-color: var(--stt-navy);
+      border: 1px solid var(--stt-navy);
+      color: #ffffff;
+      padding: 12px 28px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .ssmp-btn-solid:hover {
+      background-color: var(--stt-electric-blue);
+      border-color: var(--stt-electric-blue);
+    }
+
+    .ssmp-hero-metric-tile {
+      background: #f8fafc;
+      border: 1px solid var(--stt-border);
+      padding: 1.75rem;
+      box-shadow: 0 4px 12px rgba(2, 11, 91, 0.04);
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    .ssmp-tile-header {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--stt-navy);
+      margin-bottom: 1rem;
+      padding-bottom: 0.65rem;
+      border-bottom: 1px solid var(--stt-border-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .ssmp-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .ssmp-metric-box {
+      background: #ffffff;
+      border: 1px solid var(--stt-border-light);
+      padding: 1.15rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .ssmp-metric-box:hover {
+      border-color: var(--stt-electric-blue);
+      box-shadow: 0 2px 8px rgba(0, 26, 255, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .ssmp-metric-val {
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--stt-navy);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .ssmp-metric-lbl {
+      font-size: 0.725rem;
+      font-weight: 600;
+      color: var(--stt-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .ssmp-metric-sub {
+      font-size: 0.675rem;
+      color: #94a3b8;
+      margin-top: 0.2rem;
+    }
+
+    /* Operations Split Section */
+    .ssmp-section-wrapper {
+      width: 100%;
+      margin: 2.5rem 0 3.5rem 0;
+      padding: 0;
+      box-sizing: border-box;
+      flex: 1;
+    }
+
+    .ssmp-homesection {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 2rem;
+      align-items: flex-start;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .ssmp-section-title {
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: var(--stt-navy);
+      letter-spacing: -0.01em;
+      margin-bottom: 1.25rem;
+      line-height: 1.2;
+    }
+
+    .ssmp-category-nav {
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      border: 1px solid var(--stt-border);
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    .ssmp-cat-btn {
+      background: none;
+      border: none;
+      border-bottom: 1px solid var(--stt-border-light);
+      border-left: 4px solid transparent;
+      padding: 1.1rem 1.25rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .ssmp-cat-btn:last-child {
+      border-bottom: none;
+    }
+
+    .ssmp-cat-btn:hover {
+      background-color: #f8fafc;
+    }
+
+    .ssmp-cat-btn.active {
+      background-color: #ffffff;
+      border-left-color: var(--stt-electric-blue);
+    }
+
+    .ssmp-cat-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .ssmp-cat-name {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--stt-navy);
+    }
+
+    .ssmp-cat-badge {
+      background-color: #e5e9ec;
+      color: var(--stt-text-muted);
+      font-size: 0.725rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 9999px;
+    }
+
+    .ssmp-cat-btn.active .ssmp-cat-badge {
+      background-color: var(--stt-light-blue);
+      color: var(--stt-electric-blue);
+    }
+
+    .ssmp-cat-desc {
+      font-size: 0.725rem;
+      color: var(--stt-text-muted);
+      line-height: 1.4;
+    }
+
+    .ssmp-homesection__right {
+      min-width: 0;
+      width: 100%;
+      max-width: 100%;
+      background: #ffffff;
+      border: 1px solid var(--stt-border);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .ssmp-data-toolbar {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--stt-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.25rem;
+      background-color: #ffffff;
+      box-sizing: border-box;
+      flex-wrap: wrap;
+    }
+
+    .ssmp-search-container {
+      position: relative;
+      flex: 1;
+      min-width: 260px;
+      max-width: 500px;
+    }
+
+    .ssmp-search-input {
+      width: 100%;
+      padding: 0.7rem 1rem 0.7rem 2.5rem;
+      border: 1px solid var(--stt-border);
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+      background-color: #ffffff;
+      box-sizing: border-box;
+    }
+
+    .ssmp-search-input:focus {
+      border-color: var(--stt-electric-blue);
+      box-shadow: 0 0 0 2px rgba(0, 26, 255, 0.1);
+    }
+
+    .ssmp-search-icon {
+      position: absolute;
+      left: 0.9rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #8c9ba5;
+      font-size: 0.95rem;
+    }
+
+    .row-click-hint {
+      font-size: 0.75rem;
+      color: var(--stt-text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      white-space: nowrap;
+    }
+
+    .btn-add-record {
+      background-color: var(--stt-electric-blue);
+      color: #ffffff;
+      border: none;
+      padding: 0.7rem 1.4rem;
+      font-size: 0.825rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: background-color 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn-add-record:hover {
+      background-color: var(--stt-hover-blue);
+    }
+
+    /* Table format with Clickable Rows */
+    .ssmp-table-wrapper {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: auto;
+      max-height: 60vh;
+      -webkit-overflow-scrolling: touch;
+      box-sizing: border-box;
+    }
+
+    table {
+      width: 100%;
+      min-width: 850px;
+      border-collapse: collapse;
+      font-size: 0.825rem;
+      text-align: left;
+    }
+
+    thead {
+      background-color: #f7fafc;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    th {
+      padding: 0.9rem 1.25rem;
+      font-size: 0.725rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--stt-text-muted);
+      border-bottom: 1px solid var(--stt-border);
+      white-space: nowrap;
+    }
+
+    /* CLICKABLE ROW STYLING */
+    tbody tr {
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+
+    tbody tr:hover {
+      background-color: #eef4ff !important;
+    }
+
+    td {
+      padding: 0.95rem 1.25rem;
+      border-bottom: 1px solid #f0f3f6;
+      color: var(--stt-text-dark);
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Status Badges */
+    .stt-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      font-size: 0.725rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .pill-success {
+      background-color: var(--stt-success-bg);
+      color: var(--stt-success-text);
+    }
+
+    .pill-warning {
+      background-color: var(--stt-warning-bg);
+      color: var(--stt-warning-text);
+    }
+
+    .pill-danger {
+      background-color: var(--stt-danger-bg);
+      color: var(--stt-danger-text);
+    }
+
+    .pill-info {
+      background-color: var(--stt-light-blue);
+      color: var(--stt-electric-blue);
+    }
+
+    .btn-row-edit {
+      background: none;
+      border: 1px solid var(--stt-border);
+      color: var(--stt-navy);
+      padding: 0.35rem 0.8rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-row-edit:hover {
+      background-color: var(--stt-navy);
+      color: #ffffff;
+      border-color: var(--stt-navy);
+    }
+
+    /* ==========================================================================
+       TAB 2: AI CHAT ASSISTANT / CHAT WIDGET WORKSPACE VIEW
+       ========================================================================== */
+    #tab-chat {
+      display: block;
+      width: 100%;
+      margin: 2.5rem 0 4rem 0;
+      padding: 0;
+      box-sizing: border-box;
+      flex: 1;
+    }
+
+    .chat-layout {
+      display: flex;
+      flex-direction: column;
+      max-width: 1080px;
+      margin: 0 auto;
+      min-height: 720px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* Main Chat Container where user or CES widget will be plugged */
+    .chat-widget-card {
+      min-width: 0;
+      width: 100%;
+      max-width: 100%;
+      background: #ffffff;
+      border: 1px solid var(--stt-border);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .chat-widget-header {
+      background-color: var(--stt-navy);
+      color: #ffffff;
+      padding: 1.25rem 1.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chat-agent-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .chat-agent-avatar {
+      width: 44px;
+      height: 44px;
+      background: #001aff;
+      color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .chat-agent-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .chat-agent-subtitle {
+      font-size: 0.75rem;
+      color: #b0c4de;
+    }
+
+    .chat-status-pill {
+      background: rgba(74, 222, 128, 0.2);
+      color: #4ade80;
+      padding: 0.3rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.725rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      border: 1px solid rgba(74, 222, 128, 0.3);
+    }
+
+    /* Chat Messages Box */
+    .chat-messages-container {
+      flex: 1;
+      padding: 1.75rem;
+      overflow-y: auto;
+      background-color: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .chat-bubble {
+      max-width: 75%;
+      padding: 1rem 1.25rem;
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+
+    .bubble-agent {
+      align-self: flex-start;
+      background-color: #ffffff;
+      color: var(--stt-text-dark);
+      border: 1px solid var(--stt-border);
+      border-left: 4px solid var(--stt-electric-blue);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    .bubble-user {
+      align-self: flex-end;
+      background-color: var(--stt-navy);
+      color: #ffffff;
+      border: 1px solid var(--stt-navy);
+    }
+
+    .bubble-meta {
+      font-size: 0.7rem;
+      color: #8c9ba5;
+      margin-top: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .bubble-user .bubble-meta {
+      color: #b0b8c4;
+      justify-content: flex-end;
+    }
+
+    /* Debug Trace Visibility */
+    .debug-trace {
+      display: none !important;
+    }
+    .debug-mode-active .debug-trace {
+      display: block !important;
+    }
+
+    /* Developer Trace Switch */
+    .stt-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      user-select: none;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 4px 10px;
+      border-radius: 20px;
+      transition: all 0.15s ease;
+    }
+    .stt-switch:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .stt-switch input {
+      display: none;
+    }
+    .stt-slider {
+      position: relative;
+      width: 28px;
+      height: 16px;
+      background-color: rgba(255, 255, 255, 0.35);
+      border-radius: 16px;
+      transition: background-color 0.2s;
+    }
+    .stt-slider::before {
+      content: "";
+      position: absolute;
+      height: 12px;
+      width: 12px;
+      left: 2px;
+      bottom: 2px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      transition: transform 0.2s;
+    }
+    .stt-switch input:checked + .stt-slider {
+      background-color: #00d26a;
+    }
+    .stt-switch input:checked + .stt-slider::before {
+      transform: translateX(12px);
+    }
+    .stt-switch-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.02em;
+    }
+
+    .bubble-tool {
+      align-self: flex-start;
+      background-color: #fffbeb;
+      border: 1px solid #fde68a;
+      border-left: 4px solid #f59e0b;
+      padding: 0.75rem 1rem;
+      font-size: 0.78rem;
+      color: #78350f;
+      border-radius: 4px;
+      width: 100%;
+      max-width: 92%;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+      margin: 0.25rem 0;
+    }
+
+    .bubble-tool-response {
+      align-self: flex-start;
+      background-color: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-left: 4px solid #16a34a;
+      padding: 0.75rem 1rem;
+      font-size: 0.78rem;
+      color: #14532d;
+      border-radius: 4px;
+      width: 100%;
+      max-width: 92%;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+      margin: 0.25rem 0;
+    }
+
+    .bubble-transfer {
+      align-self: center;
+      background-color: #eff6ff;
+      border: 1px dashed #3b82f6;
+      padding: 0.45rem 1.25rem;
+      font-size: 0.78rem;
+      color: #1d4ed8;
+      font-weight: 600;
+      border-radius: 9999px;
+      margin: 0.35rem 0;
+      box-shadow: 0 1px 2px rgba(59, 130, 246, 0.08);
+    }
+
+    .typing-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.75rem 1.25rem;
+      color: var(--stt-text-muted);
+      font-style: italic;
+      background: #ffffff;
+      border: 1px solid var(--stt-border);
+      border-left: 4px solid #94a3b8;
+    }
+
+    .typing-indicator .dot {
+      width: 6px;
+      height: 6px;
+      background: #001aff;
+      border-radius: 50%;
+      animation: stt-blink 1.2s infinite ease-in-out;
+    }
+    .typing-indicator .dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-indicator .dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes stt-blink {
+      0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+      40% { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* Quick Test Prompts */
+    .chat-quick-prompts {
+      padding: 0.75rem 1.75rem;
+      background-color: #ffffff;
+      border-top: 1px solid var(--stt-border-light);
+      display: flex;
+      gap: 0.6rem;
+      overflow-x: auto;
+    }
+
+    .btn-quick-prompt {
+      background-color: #f1f5f9;
+      border: 1px solid var(--stt-border);
+      font-size: 0.75rem;
+      padding: 0.4rem 0.85rem;
+      white-space: nowrap;
+      cursor: pointer;
+      color: var(--stt-navy);
+      font-weight: 600;
+      transition: all 0.15s ease;
+    }
+
+    .btn-quick-prompt:hover {
+      background-color: var(--stt-light-blue);
+      border-color: var(--stt-electric-blue);
+      color: var(--stt-electric-blue);
+    }
+
+    /* Chat Input Box */
+    .chat-input-bar {
+      padding: 1.25rem 1.75rem;
+      background-color: #ffffff;
+      border-top: 1px solid var(--stt-border);
+      display: flex;
+      gap: 0.85rem;
+    }
+
+    .chat-text-input {
+      flex: 1;
+      padding: 0.8rem 1.1rem;
+      border: 1px solid var(--stt-border);
+      font-size: 0.875rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .chat-text-input:focus {
+      border-color: var(--stt-electric-blue);
+      box-shadow: 0 0 0 2px rgba(0, 26, 255, 0.1);
+    }
+
+    .btn-send-chat {
+      background-color: var(--stt-electric-blue);
+      color: #ffffff;
+      border: none;
+      padding: 0.8rem 1.6rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+
+    .btn-send-chat:hover {
+      background-color: var(--stt-hover-blue);
+    }
+
+    /* Right Side Drawer: Telemetry & Widget Embed Hook */
+    .chat-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .chat-side-card {
+      background: #ffffff;
+      border: 1px solid var(--stt-border);
+      padding: 1.5rem;
+    }
+
+    .chat-side-title {
+      font-size: 0.825rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--stt-navy);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--stt-border-light);
+    }
+
+    .telemetry-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      padding: 0.45rem 0;
+      border-bottom: 1px solid #f0f3f6;
+    }
+
+    .telemetry-row:last-child {
+      border-bottom: none;
+    }
+
+    .telemetry-lbl {
+      color: var(--stt-text-muted);
+    }
+
+    .telemetry-val {
+      font-weight: 600;
+      color: var(--stt-navy);
+    }
+
+    .widget-embed-box {
+      background: #f8fafc;
+      border: 1px dashed var(--stt-border);
+      padding: 1rem;
+      font-size: 0.75rem;
+      color: var(--stt-text-muted);
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
+       MODAL & TOAST
+       ========================================================================== */
+    .stt-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background-color: rgba(9, 27, 35, 0.65);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stt-modal-overlay.active {
+      display: flex;
+    }
+
+    .stt-modal-box {
+      background: #ffffff;
+      width: 100%;
+      max-width: 600px;
+      max-height: 88vh;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.25);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid var(--stt-border);
+    }
+
+    .stt-modal-head {
+      background-color: var(--stt-navy);
+      color: #ffffff;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .stt-modal-head h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .btn-modal-close {
+      background: none;
+      border: none;
+      color: #c4d0df;
+      font-size: 1.4rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .stt-modal-body {
+      padding: 1.5rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .stt-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .stt-field label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--stt-text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .stt-field input, .stt-field select {
+      padding: 0.65rem 0.85rem;
+      border: 1px solid var(--stt-border);
+      font-size: 0.875rem;
+      outline: none;
+    }
+
+    .stt-field input:focus, .stt-field select:focus {
+      border-color: var(--stt-electric-blue);
+      box-shadow: 0 0 0 2px rgba(0, 26, 255, 0.12);
+    }
+
+    .stt-modal-foot {
+      padding: 1rem 1.5rem;
+      background-color: #f7fafc;
+      border-top: 1px solid var(--stt-border-light);
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.75rem;
+    }
+
+    .btn-modal-cancel {
+      background: none;
+      border: 1px solid var(--stt-border);
+      padding: 0.6rem 1.1rem;
+      font-size: 0.825rem;
+      font-weight: 600;
+      color: var(--stt-text-muted);
+      cursor: pointer;
+    }
+
+    .btn-modal-save {
+      background-color: var(--stt-electric-blue);
+      color: #ffffff;
+      border: none;
+      padding: 0.6rem 1.35rem;
+      font-size: 0.825rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-modal-save:hover {
+      background-color: var(--stt-hover-blue);
+    }
+
+    .stt-toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background-color: var(--stt-navy);
+      color: #ffffff;
+      padding: 0.85rem 1.4rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: none;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+      border-left: 4px solid #1a6e55;
+      z-index: 2000;
+    }
+
+    .stt-toast.active {
+      display: flex;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--stt-dark-navy);
+      color: #8c9ba5;
+      padding: 2.5rem 0;
+      font-size: 0.8rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: auto;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .ssmp-footer-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .ssmp-footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .ssmp-footer-logo img {
+      height: 36px;
+      filter: brightness(0) invert(1);
+    }
+
+    .ssmp-footer-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .ssmp-footer-links a {
+      color: #a4b3c4;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .ssmp-footer-links a:hover {
+      color: #ffffff;
+    }
+
+    .ssmp-footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #64748b;
+      font-size: 0.75rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1080px) {
+      .ssmp-homesection {
+        grid-template-columns: 1fr;
+      }
+      .ssmp-hero-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Sticky Floating Tab on Left Edge of Screen (Matching Vanguard pattern) */
+    .floating-script-btn {
+      position: fixed;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 9999;
+      background: #0b1f3a;
+      color: #ffffff;
+      padding: 10px 7px 12px 6px;
+      border-radius: 0 10px 10px 0;
+      box-shadow: 4px 0 18px rgba(0, 0, 0, 0.25);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid #1e3a5f;
+      border-left: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .floating-script-btn:hover {
+      background: #001aff;
+      border-color: #3b82f6;
+      transform: translateY(-50%) scale(1.05);
+      box-shadow: 6px 0 24px rgba(0, 26, 255, 0.35);
+    }
+    .floating-script-icon {
+      font-size: 13px;
+      color: #facc15;
+    }
+    .floating-script-text {
+      font-size: 9px;
+      font-weight: 800;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #e2e8f0;
+    }
+
+    /* Left Slide-out Drawer (Hover-Activated) */
+    .demo-scripts-drawer {
+      position: fixed;
+      inset-block: 0;
+      left: 0;
+      z-index: 10000;
+      width: 420px;
+      max-width: 92vw;
+      background: #ffffff;
+      border-right: 1px solid #cbd5e1;
+      box-shadow: 12px 0 40px rgba(0, 0, 0, 0.28);
+      transform: translateX(-100%);
+      transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+    }
+    .demo-scripts-drawer.open {
+      transform: translateX(0);
+    }
+
+    .demo-scripts-header {
+      background: #0b1f3a;
+      color: #ffffff;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .btn-drawer-close {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 4px 8px;
+      line-height: 1;
+      border-radius: 4px;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-drawer-close:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .demo-scripts-feed {
+      flex: 1;
+      padding: 12px;
+      overflow-y: auto;
+      background: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* Transcript Reference Cards (No Click, Pure Information) */
+    .script-prompt-card {
+      padding: 12px 14px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      cursor: default;
+      user-select: text;
+      transition: all 0.18s ease;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      text-align: left;
+    }
+    .script-prompt-card:hover {
+      background: #ffffff;
+      border-color: #0b1f3a;
+      box-shadow: 0 4px 16px rgba(11, 31, 58, 0.12);
+    }
+
+    .script-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .script-card-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #0b1f3a;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Formatted Multi-Turn Dialogue Inside Card */
+    .transcript-dialogue {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .transcript-turn {
+      font-size: 11px;
+      line-height: 1.4;
+      padding: 6px 9px;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .turn-caller {
+      background: #f1f5f9;
+      border-left: 3px solid #0284c7;
+      color: #0f172a;
+    }
+    .turn-tara {
+      background: #f8fafc;
+      border-left: 3px solid #0b1f3a;
+      color: #1e293b;
+    }
+    .transcript-speaker {
+      font-size: 9.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .turn-caller .transcript-speaker { color: #0369a1; }
+    .turn-tara .transcript-speaker { color: #0b1f3a; }
+    .transcript-text {
+      font-size: 11px;
+      font-family: inherit;
+    }
+
+    /* Tag Badges */
+    .script-badge {
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .badge-red { background: #fee2e2; color: #b91c1c; }
+    .badge-green { background: #dcfce7; color: #15803d; }
+    .badge-blue { background: #dbeafe; color: #1d4ed8; }
+    .badge-purple { background: #f3e8ff; color: #7e22ce; }
+    .badge-amber { background: #fef3c7; color: #b45309; }
+    .badge-pink { background: #fce7f3; color: #be185d; }
+    .badge-slate { background: #f1f5f9; color: #475569; }
+
+    /* Agent Assist Warm Transfer Dossier Card */
+    .handoff-dossier-card {
+      margin: 1rem 0;
+      border: 1px solid #bfdbfe;
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(11, 31, 58, 0.12);
+      animation: fadeIn 0.3s ease;
+      font-family: inherit;
+    }
+    .dossier-header {
+      background: linear-gradient(135deg, #0b1f3a 0%, #1e3a5f 100%);
+      color: #ffffff;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .dossier-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .dossier-icon {
+      font-size: 1.3rem;
+      background: rgba(255, 255, 255, 0.12);
+      padding: 6px;
+      border-radius: 8px;
+    }
+    .dossier-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      color: #38bdf8;
+      text-transform: uppercase;
+    }
+    .dossier-subtitle {
+      font-size: 0.68rem;
+      color: #cbd5e1;
+      margin-top: 1px;
+    }
+    .dossier-queue-badge {
+      background: #f59e0b;
+      color: #0f172a;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    }
+    .dossier-body {
+      padding: 14px 16px;
+      background: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .dossier-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      background: #ffffff;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+    .dossier-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .dossier-label {
+      font-size: 0.66rem;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    .dossier-value {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #0f172a;
+    }
+    .dossier-value.val-verified { color: #16a34a; }
+    .dossier-value.val-queue { color: #0284c7; }
+    .dossier-value.val-mode { color: #7c3aed; }
+    .dossier-section {
+      background: #ffffff;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+    .dossier-sec-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #334155;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .dossier-sec-text {
+      font-size: 0.76rem;
+      line-height: 1.45;
+      color: #1e293b;
+      margin: 0;
+    }
+    .dossier-action-box {
+      display: flex;
+      gap: 8px;
+      background: #eff6ff;
+      border-left: 3px solid #0284c7;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.74rem;
+      line-height: 1.4;
+    }
+    .dossier-action-icon {
+      font-size: 1rem;
+    }
+    .dossier-footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.66rem;
+      color: #94a3b8;
+      font-weight: 500;
+      padding-top: 4px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .demo-scripts-footer {
+      padding: 10px 14px;
+      background: #f1f5f9;
+      border-top: 1px solid #e2e8f0;
+      text-align: center;
+      font-size: 11px;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    .scenario-banner {
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      border: 1px solid #334155;
+      color: #ffffff;
+      padding: 0.65rem 1rem;
+      border-radius: 6px;
+      margin-bottom: 0.85rem;
+      font-size: 0.78rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .scenario-banner-left {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       1. LOGIN VIEW (Initial screen)
+       ======================================================================== -->
+  <div id="login-view">
+    <div class="login-top-bar">
+      <img src="/state-street-logo.svg" alt="State Street" style="height: 38px;">
+    </div>
+    <div class="login-main">
+      <div class="login-card">
+        <div class="login-card-header">
+          <span class="login-badge">Institutional Access</span>
+          <h1 class="login-title">Sign in to your portal</h1>
+          <p class="login-subtitle">State Street Transfer Agency AI Operations & GECX Servicing Platform</p>
+        </div>
+
+        <div class="login-error" id="login-error-msg">
+          Invalid credentials. Please enter a valid Client User ID and password.
+        </div>
+
+        <form onsubmit="handleLogin(event)">
+          <div class="login-form-group">
+            <label for="login-username">Client User ID / Operator ID</label>
+            <input type="text" id="login-username" class="login-input" placeholder="admin" value="admin" required autocomplete="username">
+          </div>
+          <div class="login-form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" class="login-input" placeholder="admin" value="admin" required autocomplete="current-password">
+          </div>
+          <button type="submit" class="btn-login-submit">Sign In to State Street Portal →</button>
+          <div class="login-hint" style="margin-top: 14px; font-size: 12px; color: #64748b; text-align: center; background: #f1f5f9; padding: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
+            Default login: <strong style="color: #0b1f3a;">admin</strong> / <strong style="color: #0b1f3a;">admin</strong>
+          </div>
+        </form>
+      </div>
+    </div>
+    <footer>
+      <div class="ssmp-footer-container">
+        <div class="ssmp-footer-bottom" style="justify-content: center; text-align: center;">
+          © 2026 State Street Corporation. All rights reserved. Google Cloud Customer Engagement Suite (CES).
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ========================================================================
+       2. AUTHENTICATED APP VIEW
+       ======================================================================== -->
+  <div id="app-view">
+
+    <!-- Global Utility Header -->
+    <nav class="ssmp-header__global-nav">
+      <div class="stt-container ssmp-global-inner">
+        <div class="ssmp-global-left">
+          <div class="ssmp-clr-item">🌐 United States (English) ▾</div>
+          <div class="ssmp-clr-item">Institutional Transfer Agency ▾</div>
+        </div>
+        <div class="ssmp-global-right">
+          <div class="user-pill" id="active-user-badge">User: admin</div>
+          <button class="btn-logout" onclick="handleLogout()">Sign Out</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Primary Navigation Bar with 2 Main Tabs -->
+    <header class="ssmp-header">
+      <div class="stt-container ssmp-header-inner">
+        <div class="ssmp-header__logo-row">
+          <img src="/state-street-logo.svg" alt="State Street" class="ssmp-logo-img">
+          <ul class="ssmp-nav-tabs">
+            <li>
+              <button class="ssmp-nav-tab-btn active" id="nav-btn-chat" onclick="switchMainTab('chat')">
+                💬 AI Chat Assistant
+              </button>
+            </li>
+            <li>
+              <button class="ssmp-nav-tab-btn" id="nav-btn-operations" onclick="switchMainTab('operations')">
+                💼 Operations <span class="tab-badge" id="badge-total-records">65 Records</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div class="ssmp-header__actions">
+          <button class="btn-reset-demo" onclick="handleReset()">
+            ↺ Reset Demo Baseline
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ======================================================================
+         TAB 1: OPERATIONS
+         ====================================================================== -->
+    <div id="tab-operations">
+      <!-- Hero Banner -->
+      <section class="ssmp-enhanced-hero">
+        <div class="stt-container">
+          <div class="ssmp-hero-inner">
+            <div>
+              <div class="ssmp-hero-eyebrow">Transfer Agency Operations & GCEX Studio</div>
+              <h1 class="ssmp-hero-title">
+                Leading the future of <br><span>Transfer Agency Operations</span>
+              </h1>
+              <p class="ssmp-hero-subhead">
+                Authoritative real-time operational data layer synchronized with Google Cloud Customer Engagement Suite (CES / GECX). Click any row to inspect, edit, or search live Firestore records.
+              </p>
+              <div class="ssmp-hero-cta-group">
+                <a href="#data-table-container" class="ssmp-btn-solid">
+                  Explore Operations Grid ↓
+                </a>
+                <button class="btn-reset-demo" onclick="openAddModal()">
+                  + Add New Record
+                </button>
+              </div>
+            </div>
+
+          <!-- Hero Metrics Grid -->
+          <div class="ssmp-hero-metric-tile">
+            <div class="ssmp-tile-header">
+              <span>Live Operations Baseline</span>
+              <span style="color: #1a6e55;">Firestore Active</span>
+            </div>
+            <div class="ssmp-metrics-grid">
+              <div class="ssmp-metric-box" onclick="switchCategory('accounts')">
+                <div class="ssmp-metric-val" id="stat-accounts">28</div>
+                <div class="ssmp-metric-lbl">Investor Accounts</div>
+                <div class="ssmp-metric-sub">CUJ 1 Auth & Security</div>
+              </div>
+              <div class="ssmp-metric-box" onclick="switchCategory('trades')">
+                <div class="ssmp-metric-val" id="stat-trades">19</div>
+                <div class="ssmp-metric-lbl">ZILO Trades</div>
+                <div class="ssmp-metric-sub">CUJ 2 Deal Tickets</div>
+              </div>
+              <div class="ssmp-metric-box" onclick="switchCategory('work-items')">
+                <div class="ssmp-metric-val" id="stat-work-items">12</div>
+                <div class="ssmp-metric-lbl">Exception Items</div>
+                <div class="ssmp-metric-sub">CUJ 2 DINDEX & NIGO</div>
+              </div>
+              <div class="ssmp-metric-box" onclick="switchCategory('bank-rec')">
+                <div class="ssmp-metric-val" id="stat-bank-rec">6</div>
+                <div class="ssmp-metric-lbl">Bank Rec Records</div>
+                <div class="ssmp-metric-sub">CUJ 3 Monies & Cash</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+      <!-- Operations Data Management Split Section -->
+      <main class="ssmp-section-wrapper" id="data-table-container">
+        <div class="stt-container">
+          <div class="ssmp-homesection">
+          <!-- Left Column: Categories -->
+          <div class="ssmp-homesection__left">
+            <h2 class="ssmp-section-title">Authoritative Mock Data</h2>
+            <div class="ssmp-category-nav">
+              <button class="ssmp-cat-btn active" onclick="switchCategory('accounts')">
+                <div class="ssmp-cat-head">
+                  <span class="ssmp-cat-name">Investor Accounts</span>
+                  <span class="ssmp-cat-badge" id="count-accounts">0</span>
+                </div>
+                <div class="ssmp-cat-desc">Customer profile, MFA routing, verified phones & status.</div>
+              </button>
+              <button class="ssmp-cat-btn" onclick="switchCategory('trades')">
+                <div class="ssmp-cat-head">
+                  <span class="ssmp-cat-name">ZILO Trades</span>
+                  <span class="ssmp-cat-badge" id="count-trades">0</span>
+                </div>
+                <div class="ssmp-cat-desc">Trade orders, amounts, settlement dates & scenario tags.</div>
+              </button>
+              <button class="ssmp-cat-btn" onclick="switchCategory('work-items')">
+                <div class="ssmp-cat-head">
+                  <span class="ssmp-cat-name">ZILO Work Items</span>
+                  <span class="ssmp-cat-badge" id="count-work-items">0</span>
+                </div>
+                <div class="ssmp-cat-desc">DINDEX & NIGO exception hold queues, SLA tracking.</div>
+              </button>
+              <button class="ssmp-cat-btn" onclick="switchCategory('bank-rec')">
+                <div class="ssmp-cat-head">
+                  <span class="ssmp-cat-name">Bank Reconciliation</span>
+                  <span class="ssmp-cat-badge" id="count-bank-rec">0</span>
+                </div>
+                <div class="ssmp-cat-desc">Cash match records, in-cycle monitoring & SUBNR flags.</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Column: Table with Clickable Rows & Search -->
+          <div class="ssmp-homesection__right">
+            <div class="ssmp-data-toolbar">
+              <div class="ssmp-search-container">
+                <span class="ssmp-search-icon">🔍</span>
+                <input type="text" id="search-input" class="ssmp-search-input" placeholder="Search accounts, trades, references, amounts, or statuses..." oninput="handleSearch()">
+              </div>
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <span class="row-click-hint">💡 <em>Click any row to open & edit</em></span>
+                <button class="btn-add-record" onclick="openAddModal()">+ Add New Record</button>
+              </div>
+            </div>
+
+            <div class="ssmp-table-wrapper">
+              <table>
+                <thead id="table-head"></thead>
+                <tbody id="table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    </div>
+
+    <!-- ======================================================================
+         TAB 2: AI CHAT ASSISTANT (CHAT WIDGET EMBED CONTAINER)
+         ====================================================================== -->
+    <div id="tab-chat">
+      <div class="stt-container">
+        <div class="chat-layout">
+        <!-- Main Chat Widget Embed Surface -->
+        <div class="chat-widget-card" id="ces-chat-widget-container">
+          <div class="chat-widget-header">
+            <div class="chat-agent-info">
+              <div class="chat-agent-avatar">T</div>
+              <div>
+                <div class="chat-agent-title">Tara — Transfer Agency Virtual Specialist</div>
+                <div class="chat-agent-subtitle">Google Customer Engagement Suite (CES) • Audio / Chat Bidi Pipe</div>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.85rem;">
+              <label class="stt-switch" title="Toggle Developer Trace: OpenAPI requests, responses, and agent handoffs">
+                <input type="checkbox" id="debug-trace-toggle" onchange="toggleDebugMode(this.checked)">
+                <span class="stt-slider"></span>
+                <span class="stt-switch-label">Developer Trace</span>
+              </label>
+              <button type="button" class="btn-reset-chat" onclick="resetChatSession()" title="Start a fresh session with Tara" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 5px 12px; font-size: 0.75rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.35rem; border-radius: 4px; transition: background 0.15s ease;">
+                <span>🔄</span> New Chat Session
+              </button>
+            </div>
+          </div>
+
+          <!-- Chat Conversation Log -->
+          <div class="chat-messages-container" id="chat-stream">
+            <div class="chat-bubble bubble-agent">
+              Hello! I'm Tara, your State Street Transfer Agency Virtual Assistant powered by Google Cloud CES. 
+              I can assist with investor authentication, deal ticket inquiries, exception queues, and settlement cash reconciliation. How can I help you today?
+              <div class="bubble-meta"><span>Tara (CES Agent)</span> • <span>Just now</span></div>
+            </div>
+          </div>
+
+          <!-- Chat Input Bar -->
+          <form class="chat-input-bar" onsubmit="handleSendChat(event)">
+            <input type="text" id="chat-user-input" class="chat-text-input" placeholder="Type a message or inquiry to Tara..." autocomplete="off">
+            <button type="submit" class="btn-send-chat">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Corporate Footer -->
+    <footer>
+      <div class="stt-container">
+        <div class="ssmp-footer-container">
+          <div class="ssmp-footer-top">
+            <div class="ssmp-footer-logo">
+              <img src="/state-street-logo.svg" alt="State Street">
+            </div>
+            <div class="ssmp-footer-links">
+              <a href="https://www.statestreet.com/us/en/privacy-notice" target="_blank">Privacy Notice</a>
+              <a href="https://www.statestreet.com/us/en/terms-of-use" target="_blank">Terms of Use</a>
+              <a href="https://www.statestreet.com/us/en/regulatory-disclosures" target="_blank">Regulatory Disclosures</a>
+              <a href="https://www.statestreet.com/us/en/security-center" target="_blank">Security Center</a>
+              <a href="https://www.statestreet.com/us/en/cookie-policy" target="_blank">Cookies Settings</a>
+            </div>
+          </div>
+          <div class="ssmp-footer-bottom">
+            <div>© 2026 State Street Corporation. All rights reserved. Transfer Agency AI Contact Center powered by Google Cloud CES.</div>
+            <div>Firestore Database: <code>statestreet</code> (nam5)</div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ========================================================================
+       MODAL FOR IN-PLACE EDIT & ADD (Click any row to open)
+       ======================================================================== -->
+  <div class="stt-modal-overlay" id="modal">
+    <div class="stt-modal-box">
+      <div class="stt-modal-head">
+        <h3 id="modal-title">Edit Record</h3>
+        <button class="btn-modal-close" onclick="closeModal()">×</button>
+      </div>
+      <form id="modal-form" onsubmit="handleFormSubmit(event)">
+        <div class="stt-modal-body" id="modal-fields"></div>
+        <div class="stt-modal-foot">
+          <button type="button" class="btn-modal-cancel" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn-modal-save">Save to Firestore</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="stt-toast" id="toast">
+    <span>✓</span> <span id="toast-message">Record saved successfully to Firestore!</span>
+  </div>
+
+  <!-- ========================================================================
+       JAVASCRIPT LOGIC
+       ======================================================================== -->
+  <script>
+    // 1. Auth Credentials
+    const VALID_USERS = {
+      'admin': 'admin',
+      '220980': 'password',
+      'stilwalli': 'password'
+    };
+
+    let currentUser = sessionStorage.getItem('stt_user');
+    let currentCategory = 'accounts';
+    let rawData = {
+      accounts: [],
+      trades: [],
+      'work-items': [],
+      'bank-rec': []
+    };
+    let currentEditItem = null;
+    let isAdding = false;
+
+    // Table Column Definitions
+    const columnDefs = {
+      accounts: [
+        { key: 'account_no', label: 'Account No' },
+        { key: 'auth_profile_id', label: 'Auth Profile ID' },
+        { key: 'investor_name', label: 'Investor Name' },
+        { key: 'account_status', label: 'Account Status', type: 'status' },
+        { key: 'registered_email', label: 'Registered Email' },
+        { key: 'registered_phone', label: 'Registered Phone' },
+        { key: 'phone_verified', label: 'Phone Verified', type: 'verified' },
+        { key: 'allowed_otp_route', label: 'Allowed MFA Route' },
+        { key: 'actions', label: 'Action', type: 'action' }
+      ],
+      trades: [
+        { key: 'trade_ref', label: 'Trade Ref' },
+        { key: 'account_no', label: 'Account No' },
+        { key: 'fund_name', label: 'Fund Name' },
+        { key: 'trade_type', label: 'Type' },
+        { key: 'gross_amount', label: 'Gross Amount', type: 'currency' },
+        { key: 'trade_status', label: 'Trade Status', type: 'trade_status' },
+        { key: 'trade_date', label: 'Trade Date' },
+        { key: 'settlement_date', label: 'Settlement Date' },
+        { key: 'scenario', label: 'Scenario' },
+        { key: 'actions', label: 'Action', type: 'action' }
+      ],
+      'work-items': [
+        { key: 'work_item_id', label: 'Work Item ID' },
+        { key: 'trade_ref', label: 'Trade Ref' },
+        { key: 'account_no', label: 'Account No' },
+        { key: 'queue_name', label: 'Queue' },
+        { key: 'work_item_status', label: 'Status', type: 'wi_status' },
+        { key: 'nigo_reason', label: 'NIGO / Hold Reason' },
+        { key: 'sla', label: 'SLA' },
+        { key: 'scenario', label: 'Scenario' },
+        { key: 'actions', label: 'Action', type: 'action' }
+      ],
+      'bank-rec': [
+        { key: 'trade_ref', label: 'Trade Ref' },
+        { key: 'account_no', label: 'Account No' },
+        { key: 'bank_rec_status', label: 'Bank Rec Status', type: 'bank_status' },
+        { key: 'zilo_status', label: 'ZILO Status', type: 'trade_status' },
+        { key: 'amount', label: 'Amount', type: 'currency' },
+        { key: 'subnr_flag', label: 'SUBNR Flag', type: 'subnr' },
+        { key: 'settlement_date', label: 'Settlement Date' },
+        { key: 'scenario', label: 'Scenario' },
+        { key: 'actions', label: 'Action', type: 'action' }
+      ]
+    };
+
+    // ========================================================================
+    // AUTH LOGIC
+    // ========================================================================
+    function checkAuth() {
+      if (currentUser) {
+        document.getElementById('login-view').style.display = 'none';
+        document.getElementById('app-view').style.display = 'flex';
+        document.getElementById('active-user-badge').innerText = `Operator: ${currentUser}`;
+        loadAllData();
+        switchMainTab('chat');
+      } else {
+        document.getElementById('login-view').style.display = 'flex';
+        document.getElementById('app-view').style.display = 'none';
+      }
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const u = document.getElementById('login-username').value.trim();
+      const p = document.getElementById('login-password').value;
+      const errorDiv = document.getElementById('login-error-msg');
+
+      const isAllowedAdmin = u.toLowerCase() === 'admin' && (p === 'admin' || p === 'password');
+      const isAllowedUser = VALID_USERS[u] && (VALID_USERS[u] === p || p === 'admin' || p === 'password');
+
+      if (isAllowedAdmin || isAllowedUser) {
+        currentUser = u;
+        sessionStorage.setItem('stt_user', u);
+        errorDiv.style.display = 'none';
+        checkAuth();
+      } else {
+        errorDiv.style.display = 'block';
+      }
+    }
+
+
+    function handleLogout() {
+      sessionStorage.removeItem('stt_user');
+      currentUser = null;
+      checkAuth();
+    }
+
+    // ========================================================================
+    // TOP LEVEL TABS: Operations vs AI Chat
+    // ========================================================================
+    function switchMainTab(tab) {
+      document.querySelectorAll('.ssmp-nav-tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById('tab-operations').style.display = 'none';
+      document.getElementById('tab-chat').style.display = 'none';
+
+      if (tab === 'operations') {
+        document.getElementById('nav-btn-operations').classList.add('active');
+        document.getElementById('tab-operations').style.display = 'block';
+        renderTable();
+      } else if (tab === 'chat') {
+        document.getElementById('nav-btn-chat').classList.add('active');
+        document.getElementById('tab-chat').style.display = 'block';
+      }
+    }
+
+    // ========================================================================
+    // OPERATIONS DATA LOGIC
+    // ========================================================================
+    async function loadAllData() {
+      try {
+        const [accs, trds, wis, brec] = await Promise.all([
+          fetch('/api/accounts').then(r => r.json()),
+          fetch('/api/trades').then(r => r.json()),
+          fetch('/api/work-items').then(r => r.json()),
+          fetch('/api/bank-rec').then(r => r.json())
+        ]);
+
+        rawData.accounts = accs;
+        rawData.trades = trds;
+        rawData['work-items'] = wis;
+        rawData['bank-rec'] = brec;
+
+        const total = accs.length + trds.length + wis.length + brec.length;
+        document.getElementById('badge-total-records').innerText = `${total} Records`;
+
+        document.getElementById('count-accounts').innerText = accs.length;
+        document.getElementById('count-trades').innerText = trds.length;
+        document.getElementById('count-work-items').innerText = wis.length;
+        document.getElementById('count-bank-rec').innerText = brec.length;
+
+        document.getElementById('stat-accounts').innerText = accs.length;
+        document.getElementById('stat-trades').innerText = trds.length;
+        document.getElementById('stat-work-items').innerText = wis.length;
+        document.getElementById('stat-bank-rec').innerText = brec.length;
+
+        renderTable();
+      } catch (err) {
+        console.error("Error loading data:", err);
+      }
+    }
+
+    function switchCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.ssmp-cat-btn').forEach(btn => btn.classList.remove('active'));
+      const activeIdx = ['accounts', 'trades', 'work-items', 'bank-rec'].indexOf(cat);
+      if (activeIdx !== -1) {
+        document.querySelectorAll('.ssmp-cat-btn')[activeIdx].classList.add('active');
+      }
+      document.getElementById('search-input').value = '';
+      renderTable();
+    }
+
+    function renderTable() {
+      const defs = columnDefs[currentCategory];
+      const thead = document.getElementById('table-head');
+      const tbody = document.getElementById('table-body');
+      const query = document.getElementById('search-input').value.toLowerCase();
+
+      thead.innerHTML = `<tr>${defs.map(d => `<th>${d.label}</th>`).join('')}</tr>`;
+
+      let data = rawData[currentCategory] || [];
+      if (query) {
+        data = data.filter(item => Object.values(item).some(val => String(val).toLowerCase().includes(query)));
+      }
+
+      if (data.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="${defs.length}" style="text-align:center; padding: 3rem; color: #8c9ba5;">No matching records found.</td></tr>`;
+        return;
+      }
+
+      const idKey = currentCategory === 'accounts' ? 'account_no' : (currentCategory === 'trades' || currentCategory === 'bank-rec' ? 'trade_ref' : 'work_item_id');
+
+      // Click on ANY ROW opens the edit modal
+      tbody.innerHTML = data.map(item => {
+        const idVal = item[idKey];
+        return `<tr onclick="openEditModal('${idVal}')" title="Click to edit ${idVal}">${defs.map(d => renderCell(item, d, idVal)).join('')}</tr>`;
+      }).join('');
+    }
+
+    function renderCell(item, colDef, idVal) {
+      const val = item[colDef.key] || '';
+      if (colDef.type === 'status') {
+        const cls = val === 'Active' ? 'pill-success' : val === 'Suspended' ? 'pill-warning' : 'pill-danger';
+        return `<td><span class="stt-pill ${cls}">${val}</span></td>`;
+      }
+      if (colDef.type === 'verified') {
+        const cls = val === 'Yes' ? 'pill-success' : 'pill-danger';
+        return `<td><span class="stt-pill ${cls}">${val}</span></td>`;
+      }
+      if (colDef.type === 'trade_status') {
+        const cls = val === 'Processed' || val === 'Settled' ? 'pill-success' : 'pill-warning';
+        return `<td><span class="stt-pill ${cls}">${val}</span></td>`;
+      }
+      if (colDef.type === 'wi_status') {
+        const cls = val === 'DINDEX' ? 'pill-info' : (val === 'NIGO' || val === 'REJECTED') ? 'pill-danger' : 'pill-warning';
+        return `<td><span class="stt-pill ${cls}">${val}</span></td>`;
+      }
+      if (colDef.type === 'bank_status') {
+        const cls = val === 'Matched' ? 'pill-success' : 'pill-warning';
+        return `<td><span class="stt-pill ${cls}">${val}</span></td>`;
+      }
+      if (colDef.type === 'subnr') {
+        const cls = val === 'Yes' ? 'pill-danger' : 'pill-success';
+        return `<td><span class="stt-pill ${cls}">${val}</span></td>`;
+      }
+      if (colDef.type === 'currency') {
+        const num = Number(val);
+        const cur = item.currency || 'USD';
+        return `<td><strong>$${num.toLocaleString('en-US', {minimumFractionDigits: 2})}</strong> ${cur}</td>`;
+      }
+      if (colDef.type === 'action') {
+        return `<td><button class="btn-row-edit" onclick="event.stopPropagation(); openEditModal('${idVal}')">Edit</button></td>`;
+      }
+      return `<td>${val}</td>`;
+    }
+
+    function handleSearch() {
+      renderTable();
+    }
+
+    // ========================================================================
+    // EDIT / ADD MODAL (OPEN, SAVE, UPDATE FIRESTORE)
+    // ========================================================================
+    function openEditModal(idVal) {
+      isAdding = false;
+      const idKey = currentCategory === 'accounts' ? 'account_no' : (currentCategory === 'trades' || currentCategory === 'bank-rec' ? 'trade_ref' : 'work_item_id');
+      currentEditItem = rawData[currentCategory].find(i => i[idKey] === idVal);
+      if (!currentEditItem) return;
+
+      document.getElementById('modal-title').innerText = `Edit ${currentCategory.replace('-', ' ').toUpperCase()} (${idVal})`;
+      buildFormFields(currentEditItem, false);
+      document.getElementById('modal').classList.add('active');
+    }
+
+    function openAddModal() {
+      isAdding = true;
+      currentEditItem = {};
+      document.getElementById('modal-title').innerText = `Add New ${currentCategory.replace('-', ' ').toUpperCase()} Record`;
+      buildFormFields({}, true);
+      document.getElementById('modal').classList.add('active');
+    }
+
+    function buildFormFields(item, isNew) {
+      const defs = columnDefs[currentCategory].filter(d => d.key !== 'actions');
+      const container = document.getElementById('modal-fields');
+      container.innerHTML = defs.map(d => {
+        const val = item[d.key] || '';
+        const isReadonly = (!isNew && (d.key === 'account_no' || d.key === 'trade_ref' || d.key === 'work_item_id')) ? 'readonly style="background-color:#F1F5F9;"' : '';
+        
+        if (d.type === 'status') {
+          return `
+            <div class="stt-field">
+              <label>${d.label}</label>
+              <select name="${d.key}">
+                <option value="Active" ${val==='Active'?'selected':''}>Active</option>
+                <option value="Suspended" ${val==='Suspended'?'selected':''}>Suspended</option>
+                <option value="Closed" ${val==='Closed'?'selected':''}>Closed</option>
+              </select>
+            </div>`;
+        }
+        if (d.type === 'verified' || d.type === 'subnr') {
+          return `
+            <div class="stt-field">
+              <label>${d.label}</label>
+              <select name="${d.key}">
+                <option value="Yes" ${val==='Yes'?'selected':''}>Yes</option>
+                <option value="No" ${val==='No'?'selected':''}>No</option>
+              </select>
+            </div>`;
+        }
+        if (d.type === 'trade_status') {
+          return `
+            <div class="stt-field">
+              <label>${d.label}</label>
+              <select name="${d.key}">
+                <option value="Processed" ${val==='Processed'?'selected':''}>Processed</option>
+                <option value="Pending" ${val==='Pending'?'selected':''}>Pending</option>
+                <option value="Settled" ${val==='Settled'?'selected':''}>Settled</option>
+                <option value="Unsettled" ${val==='Unsettled'?'selected':''}>Unsettled</option>
+              </select>
+            </div>`;
+        }
+        return `
+          <div class="stt-field">
+            <label>${d.label}</label>
+            <input type="text" name="${d.key}" value="${val}" ${isReadonly} required>
+          </div>`;
+      }).join('');
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.remove('active');
+    }
+
+    async function handleFormSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const formData = new FormData(form);
+      const payload = {};
+      formData.forEach((v, k) => payload[k] = v);
+
+      const idKey = currentCategory === 'accounts' ? 'account_no' : (currentCategory === 'trades' || currentCategory === 'bank-rec' ? 'trade_ref' : 'work_item_id');
+      const docId = payload[idKey];
+
+      const url = isAdding ? `/api/${currentCategory}` : `/api/${currentCategory}/${docId}`;
+      const method = isAdding ? 'POST' : 'PUT';
+
+      try {
+        const res = await fetch(url, {
+          method: method,
+          headers: { 'Content-Type': 'application/json' },
+          body: jsonStringifyNumeric(payload)
+        });
+        if (res.ok) {
+          closeModal();
+          showToast(`Record ${docId} successfully saved to Firestore!`);
+          await loadAllData();
+        } else {
+          alert("Error saving record: " + (await res.text()));
+        }
+      } catch (err) {
+        alert("Error saving record: " + err.message);
+      }
+    }
+
+    function jsonStringifyNumeric(obj) {
+      const copy = { ...obj };
+      if ('gross_amount' in copy) copy.gross_amount = parseFloat(copy.gross_amount) || 0;
+      if ('amount' in copy) copy.amount = parseFloat(copy.amount) || 0;
+      return JSON.stringify(copy);
+    }
+
+    async function handleReset() {
+      if (!confirm("Reset all collections in Firestore 'statestreet' to baseline State Street demo data?")) {
+        return;
+      }
+      try {
+        showToast("Restoring demo baseline in Firestore...");
+        const res = await fetch('/api/reset', { method: 'POST' });
+        if (res.ok) {
+          showToast("Demo baseline successfully restored!");
+          await loadAllData();
+        }
+      } catch (err) {
+        alert("Error resetting data: " + err.message);
+      }
+    }
+
+    // ========================================================================
+    // CHAT WIDGET INTERACTION LOGIC (WIRED TO LIVE CES AGENT & CLOUD RUN)
+    // ========================================================================
+    let currentChatSessionId = 'stt-web-' + Math.random().toString(36).substring(2, 10);
+    sessionStorage.setItem('ces_session_id', currentChatSessionId);
+    const sessionElem = document.getElementById('tel-session');
+    if (sessionElem) sessionElem.innerText = currentChatSessionId;
+
+    let isDebugMode = sessionStorage.getItem('stt_debug_trace') === 'true';
+
+    function toggleDebugMode(checked) {
+      isDebugMode = checked;
+      sessionStorage.setItem('stt_debug_trace', checked ? 'true' : 'false');
+      const container = document.getElementById('ces-chat-widget-container');
+      if (container) {
+        if (checked) {
+          container.classList.add('debug-mode-active');
+          showToast("Developer Trace enabled: displaying OpenAPI requests, responses, and handoffs.");
+        } else {
+          container.classList.remove('debug-mode-active');
+          showToast("Developer Trace disabled: showing clean customer conversation.");
+        }
+      }
+      const toggle = document.getElementById('debug-trace-toggle');
+      if (toggle) toggle.checked = checked;
+    }
+
+    function initDebugMode() {
+      const toggle = document.getElementById('debug-trace-toggle');
+      if (toggle) toggle.checked = isDebugMode;
+      const container = document.getElementById('ces-chat-widget-container');
+      if (container && isDebugMode) {
+        container.classList.add('debug-mode-active');
+      }
+    }
+
+    function resetChatSession() {
+      currentChatSessionId = 'stt-web-' + Math.random().toString(36).substring(2, 10);
+      sessionStorage.setItem('ces_session_id', currentChatSessionId);
+      if (document.getElementById('tel-session')) document.getElementById('tel-session').innerText = currentChatSessionId;
+      if (document.getElementById('tel-account')) document.getElementById('tel-account').innerText = 'Unauthenticated';
+      if (document.getElementById('tel-mfa')) {
+        document.getElementById('tel-mfa').innerText = 'Pending Challenge';
+        document.getElementById('tel-mfa').style.color = '#8c6b00';
+      }
+      if (document.getElementById('tel-journey')) document.getElementById('tel-journey').innerText = 'StateStreetGECXDemo';
+      if (document.getElementById('tel-latency')) document.getElementById('tel-latency').innerText = '—';
+      if (document.getElementById('tel-tool')) document.getElementById('tel-tool').innerText = 'None';
+      
+      const stream = document.getElementById('chat-stream');
+      stream.innerHTML = `
+        <div class="chat-bubble bubble-agent">
+          Hello! I'm Tara, your State Street Transfer Agency Virtual Assistant powered by Google Cloud CES. 
+          I can assist with investor authentication, deal ticket inquiries, exception queues, and settlement cash reconciliation. How can I help you today?
+          <div class="bubble-meta"><span>Tara (CES Agent)</span> • <span>Just now</span></div>
+        </div>
+      `;
+      showToast("Started fresh conversational session.");
+    }
+
+    function injectPrompt(text) {
+      const input = document.getElementById('chat-user-input');
+      input.value = text;
+      input.focus();
+      handleSendChat(new Event('submit'));
+    }
+
+    async function handleSendChat(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      const input = document.getElementById('chat-user-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      appendChatMessage('user', text);
+      input.value = '';
+
+      showTypingIndicator();
+      const startTime = performance.now();
+
+      try {
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            session_id: currentChatSessionId,
+            message: text
+          })
+        });
+
+        hideTypingIndicator();
+
+        if (!response.ok) {
+          const errData = await response.json().catch(() => ({ detail: response.statusText }));
+          appendChatMessage('agent', `⚠️ Error communicating with State Street CES agent: ${errData.detail || response.statusText}`);
+          return;
+        }
+
+        const data = await response.json();
+        const latency = Math.round(performance.now() - startTime);
+
+        // Update active session ID if server assigned/returned one
+        if (data.session_id) {
+          currentChatSessionId = data.session_id;
+          sessionStorage.setItem('ces_session_id', currentChatSessionId);
+          if (document.getElementById('tel-session')) document.getElementById('tel-session').innerText = currentChatSessionId;
+        }
+
+        // Render agent transfer / handoff if occurred (toggleable in trace mode)
+        if (data.transfer) {
+          appendTransferNotice(data.transfer);
+          if (document.getElementById('tel-journey')) document.getElementById('tel-journey').innerText = data.transfer;
+        } else if (data.agent) {
+          if (document.getElementById('tel-journey')) document.getElementById('tel-journey').innerText = data.agent;
+        }
+
+        // Render OpenAPI tool requests if occurred (toggleable in trace mode)
+        if (data.tool_calls && data.tool_calls.length > 0) {
+          for (const tc of data.tool_calls) {
+            appendToolCallNotice(tc);
+            if (document.getElementById('tel-tool')) document.getElementById('tel-tool').innerText = tc.tool;
+            if (tc.args && tc.args.account_no) {
+              if (document.getElementById('tel-account')) document.getElementById('tel-account').innerText = tc.args.account_no;
+            }
+            if (tc.tool && (tc.tool.includes('validate_otp') || tc.tool.includes('validate'))) {
+              if (document.getElementById('tel-mfa')) {
+                document.getElementById('tel-mfa').innerText = 'Verified (MFA Validated)';
+                document.getElementById('tel-mfa').style.color = '#1a6e55';
+              }
+            }
+          }
+        }
+
+        // Render OpenAPI tool responses if occurred (toggleable in trace mode)
+        if (data.tool_responses && data.tool_responses.length > 0) {
+          for (const tr of data.tool_responses) {
+            appendToolResponseNotice(tr);
+          }
+        }
+
+        // Update telemetry
+        if (document.getElementById('tel-latency')) {
+          document.getElementById('tel-latency').innerText = `${data.latency_ms || latency} ms`;
+        }
+
+        // Render agent reply
+        appendChatMessage('agent', data.reply, data.agent);
+
+        // Render Agent Assist Warm Transfer Dossier if escalation occurred
+        if (data.handoff_dossier) {
+          appendHandoffDossierCard(data.handoff_dossier);
+        }
+
+      } catch (err) {
+        hideTypingIndicator();
+        appendChatMessage('agent', `⚠️ Network error: ${err.message}. Please check connection.`);
+      }
+    }
+
+    function showTypingIndicator() {
+      const stream = document.getElementById('chat-stream');
+      const typing = document.createElement('div');
+      typing.id = 'chat-typing-indicator';
+      typing.className = 'chat-bubble bubble-agent typing-indicator';
+      typing.innerHTML = `<div class="dot"></div><div class="dot"></div><div class="dot"></div><span>Tara is querying State Street systems...</span>`;
+      stream.appendChild(typing);
+      stream.scrollTop = stream.scrollHeight;
+    }
+
+    function hideTypingIndicator() {
+      const el = document.getElementById('chat-typing-indicator');
+      if (el) el.remove();
+    }
+
+    function appendToolCallNotice(tc) {
+      const stream = document.getElementById('chat-stream');
+      const toolDiv = document.createElement('div');
+      toolDiv.className = 'bubble-tool debug-trace';
+      const argsStr = JSON.stringify(tc.args, null, 2);
+      toolDiv.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 0.35rem;">
+          <span style="font-weight:700; color: #b45309; font-size:0.78rem;">⚡ OpenAPI Tool Request: <code>${escapeHtml(tc.tool)}</code></span>
+          <span style="font-size:0.68rem; background:#fef3c7; color:#92400e; padding:2px 6px; border-radius:3px; font-weight:600;">HTTP Request</span>
+        </div>
+        <pre style="font-size:0.75rem; margin:0; overflow-x:auto; background: #fffdf5; border:1px solid #fef3c7; padding: 6px 10px; border-radius: 4px; font-family:monospace; color:#334155;">${escapeHtml(argsStr)}</pre>
+      `;
+      stream.appendChild(toolDiv);
+      stream.scrollTop = stream.scrollHeight;
+    }
+
+    function appendToolResponseNotice(tr) {
+      const stream = document.getElementById('chat-stream');
+      const respDiv = document.createElement('div');
+      respDiv.className = 'bubble-tool-response debug-trace';
+      const respStr = JSON.stringify(tr.response, null, 2);
+      respDiv.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 0.35rem;">
+          <span style="font-weight:700; color: #166534; font-size:0.78rem;">📥 OpenAPI Tool Response: <code>${escapeHtml(tr.tool)}</code></span>
+          <span style="font-size:0.68rem; background:#dcfce7; color:#15803d; padding:2px 6px; border-radius:3px; font-weight:600;">Status: 200 OK</span>
+        </div>
+        <pre style="font-size:0.75rem; margin:0; overflow-x:auto; background: #f7fee7; border:1px solid #dcfce7; padding: 6px 10px; border-radius: 4px; font-family:monospace; color:#334155;">${escapeHtml(respStr)}</pre>
+      `;
+      stream.appendChild(respDiv);
+      stream.scrollTop = stream.scrollHeight;
+    }
+
+    function appendTransferNotice(agentName) {
+      const stream = document.getElementById('chat-stream');
+      const transferDiv = document.createElement('div');
+      transferDiv.className = 'bubble-transfer debug-trace';
+      transferDiv.innerHTML = `🔄 Dynamic Agent Handoff: Control transferred to <strong>${escapeHtml(agentName)}</strong>`;
+      stream.appendChild(transferDiv);
+      stream.scrollTop = stream.scrollHeight;
+    }
+
+    function appendHandoffDossierCard(dossier) {
+      if (!dossier) return;
+      const stream = document.getElementById('chat-stream');
+      const card = document.createElement('div');
+      card.className = 'conversation-summary-card';
+      card.style.cssText = 'background: #f8fafc; border: 1px solid #cbd5e1; border-left: 4px solid var(--stt-electric-blue); border-radius: 8px; padding: 1rem 1.25rem; margin: 0.75rem 0; box-shadow: 0 1px 3px rgba(0,0,0,0.05); font-family: inherit;';
+      card.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.4rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 0.85rem; color: var(--stt-navy); text-transform: uppercase; letter-spacing: 0.5px;">
+            <span>📝</span>
+            <span>Conversation Summary</span>
+          </div>
+          <span style="font-size: 0.75rem; background: #e0f2fe; color: #0284c7; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 600;">Handoff Completed</span>
+        </div>
+        <div style="font-size: 0.875rem; color: #1e293b; line-height: 1.5; margin-bottom: 0.5rem;">
+          ${escapeHtml(dossier.case_summary || dossier.reason || 'Customer inquiry transferred to specialist.')}
+        </div>
+        <div style="display: flex; gap: 1rem; font-size: 0.75rem; color: #64748b;">
+          <span><strong>Account:</strong> ${escapeHtml(dossier.account_no || 'N/A')}</span>
+          <span><strong>Queue:</strong> ${escapeHtml(dossier.target_queue || 'Investor Services')}</span>
+          <span><strong>Session Status:</strong> Ended (SIP-BYE)</span>
+        </div>
+      `;
+      stream.appendChild(card);
+      stream.scrollTop = stream.scrollHeight;
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function appendChatMessage(sender, text, agentName) {
+      const stream = document.getElementById('chat-stream');
+      const bubble = document.createElement('div');
+      bubble.className = `chat-bubble bubble-${sender}`;
+      let senderLabel = `Operator (${currentUser || 'admin'})`;
+      if (sender === 'agent') {
+        senderLabel = agentName ? `Tara (${agentName})` : 'Tara (CES Agent)';
+      }
+      
+      // Basic markdown bold replacement
+      let formattedText = escapeHtml(text).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      bubble.innerHTML = `${formattedText.replace(/\n/g, '<br>')}<div class="bubble-meta"><span>${senderLabel}</span> • <span>${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span></div>`;
+      stream.appendChild(bubble);
+      stream.scrollTop = stream.scrollHeight;
+    }
+
+    // ========================================================================
+    // DEMO TEST SCRIPTS DRAWER (Vanguard Pattern)
+    // ========================================================================
+    const DEMO_SCRIPTS = [
+      {
+        title: 'Cross-Account Recovery',
+        icon: '🛡️',
+        badge: 'Security Lock',
+        badgeClass: 'badge-red',
+        prompt: '"What is the status of trade TRD-5005?"',
+        turns: [
+          { text: 'My account number is ACC-1001' },
+          { text: '123456' },
+          { text: 'What is the status of trade TRD-5005?' }
+        ]
+      },
+      {
+        title: 'Executed Trade Status',
+        icon: '📈',
+        badge: 'ZILO Works Core',
+        badgeClass: 'badge-blue',
+        prompt: '"Can you check the execution status of trade TRD-5001?"',
+        turns: [
+          { text: 'My account number is ACC-1001' },
+          { text: '123456' },
+          { text: 'Can you check the execution status of trade TRD-5001?' }
+        ]
+      },
+      {
+        title: 'Intake Queue (DINDEX)',
+        icon: '📋',
+        badge: 'Document Intake',
+        badgeClass: 'badge-slate',
+        prompt: '"Where is my order TRD-5003? Has it been processed yet?"',
+        turns: [
+          { text: 'My account number is ACC-1001' },
+          { text: '123456' },
+          { text: 'Where is my order TRD-5003? Has it been processed yet?' }
+        ]
+      },
+      {
+        title: 'NIGO Signature Review',
+        icon: '⚠️',
+        badge: 'Investor Services',
+        badgeClass: 'badge-amber',
+        prompt: '"Please check the status of trade TRD-5004"',
+        turns: [
+          { text: 'My account number is ACC-1001' },
+          { text: '123456' },
+          { text: 'Please check the status of trade TRD-5004' }
+        ]
+      },
+      {
+        title: 'Monies Received & Settled',
+        icon: '💰',
+        badge: 'Bank Rec Matched',
+        badgeClass: 'badge-green',
+        prompt: '"Did the funds arrive for trade TRD-5010?"',
+        turns: [
+          { text: 'My account number is ACC-1001' },
+          { text: '123456' },
+          { text: 'Did the funds arrive for trade TRD-5010?' }
+        ]
+      },
+      {
+        title: 'Overdue Monies (SUBNR)',
+        icon: '🚨',
+        badge: 'Cash Management',
+        badgeClass: 'badge-purple',
+        prompt: '"What is the settlement status of trade TRD-5012?"',
+        turns: [
+          { text: 'My account number is ACC-1001' },
+          { text: '123456' },
+          { text: 'What is the settlement status of trade TRD-5012?' }
+        ]
+      },
+      {
+        title: '2-Clue Privacy Gate',
+        icon: '🔒',
+        badge: 'Privacy Gate',
+        badgeClass: 'badge-pink',
+        prompt: '"I placed a trade for $500,000 last week, can you check on it?"',
+        turns: [
+          { text: 'My account number is ACC-1001' },
+          { text: '123456' },
+          { text: 'I placed a trade for $500,000 last week, can you check on it?' },
+          { text: 'It was a Subscription for Global Growth Class A on September 18th' }
+        ]
+      },
+      {
+        title: 'Trade Not Found Help',
+        icon: '❓',
+        badge: 'Recovery Help',
+        badgeClass: 'badge-slate',
+        prompt: '"What is the status of trade TRD-9999?"',
+        turns: [
+          { text: 'My account number is ACC-1001' },
+          { text: '123456' },
+          { text: 'What is the status of trade TRD-9999?' }
+        ]
+      }
+    ];
+
+    // Hover & Click activation for Sample Transcripts Drawer
+    let drawerCloseTimer = null;
+
+    function openTranscriptDrawer() {
+      if (drawerCloseTimer) clearTimeout(drawerCloseTimer);
+      const drawer = document.getElementById('demo-scripts-drawer');
+      if (drawer) drawer.classList.add('open');
+    }
+
+    function closeTranscriptDrawer(immediate = false) {
+      if (drawerCloseTimer) clearTimeout(drawerCloseTimer);
+      if (immediate) {
+        const drawer = document.getElementById('demo-scripts-drawer');
+        if (drawer) drawer.classList.remove('open');
+      } else {
+        drawerCloseTimer = setTimeout(() => {
+          const drawer = document.getElementById('demo-scripts-drawer');
+          if (drawer) drawer.classList.remove('open');
+        }, 260);
+      }
+    }
+
+    function toggleTranscriptDrawer(e) {
+      const ev = e || window.event;
+      if (ev && ev.stopPropagation) ev.stopPropagation();
+      if (drawerCloseTimer) clearTimeout(drawerCloseTimer);
+      const drawer = document.getElementById('demo-scripts-drawer');
+      if (drawer) {
+        drawer.classList.toggle('open');
+      }
+    }
+
+    function initTranscriptDrawerHover() {
+      const drawer = document.getElementById('demo-scripts-drawer');
+      const tabBtn = document.getElementById('floating-script-drawer-btn');
+      if (tabBtn) {
+        tabBtn.addEventListener('mouseenter', openTranscriptDrawer);
+        tabBtn.addEventListener('mouseleave', () => closeTranscriptDrawer(false));
+      }
+      if (drawer) {
+        drawer.addEventListener('mouseenter', openTranscriptDrawer);
+        drawer.addEventListener('mouseleave', () => closeTranscriptDrawer(false));
+      }
+
+      // Close drawer when clicking outside
+      document.addEventListener('click', (e) => {
+        const d = document.getElementById('demo-scripts-drawer');
+        const b = document.getElementById('floating-script-drawer-btn');
+        if (!d || !d.classList.contains('open')) return;
+        if (!d.contains(e.target) && (!b || !b.contains(e.target))) {
+          d.classList.remove('open');
+        }
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-message').innerText = msg;
+      toast.classList.add('active');
+      setTimeout(() => toast.classList.remove('active'), 4000);
+    }
+
+    // Initialize
+    checkAuth();
+    initDebugMode();
+    initTranscriptDrawerHover();
+  </script>
+
+  <!-- ========================================================================= -->
+  <!-- DEMO SCRIPTS & TEST PROMPTS DRAWER (Left Slide-out Panel)                 -->
+  <!-- ========================================================================= -->
+  <div id="demo-scripts-drawer" class="demo-scripts-drawer">
+    <!-- Drawer Header -->
+    <div class="demo-scripts-header">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 15px; color: #facc15;">💬</span>
+        <h3 style="font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin: 0; color: #ffffff;">SAMPLE TRANSCRIPTS FOR TESTING</h3>
+      </div>
+      <button type="button" class="btn-drawer-close" onclick="closeTranscriptDrawer(true)" title="Close transcripts drawer" aria-label="Close transcripts drawer">✕</button>
+    </div>
+
+    <!-- Subtitle Guide -->
+    <div style="padding: 10px 14px; background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+      <p style="font-size: 11px; color: #475569; margin: 0; font-weight: 600;">Click or hover reference guide for manual chat testing with Tara:</p>
+      <p style="font-size: 10px; color: #94a3b8; margin: 2px 0 0 0;">Click tab/outside or move mouse away to close • Copy/paste or type prompts to test</p>
+    </div>
+
+    <!-- Script Items Feed (Pre-rendered Sample Transcripts, No Clicks) -->
+    <div class="demo-scripts-feed" id="demo-scripts-feed">
+      <!-- Scenario 1: Executed Trade -->
+      <div class="script-prompt-card">
+        <div class="script-card-header">
+          <span class="script-card-title"><span>📈</span> Executed Trade Status</span>
+          <span class="script-badge badge-blue">ZILO Works Core</span>
+        </div>
+        <div class="transcript-dialogue">
+          <div class="transcript-turn turn-caller">
+            <span class="transcript-speaker">👤 Caller</span>
+            <span class="transcript-text">"Can you check the execution status of trade TRD-5001?"</span>
+          </div>
+          <div class="transcript-turn turn-tara">
+            <span class="transcript-speaker">🤖 Tara</span>
+            <span class="transcript-text">"Trade TRD-5001 for Global Growth Fund A was executed on Sept 18 for $1,250,000 USD. Status is Processed."</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scenario 2: Pending Trade Ingestion -->
+      <div class="script-prompt-card">
+        <div class="script-card-header">
+          <span class="script-card-title"><span>⏳</span> Pending Trade Ingestion</span>
+          <span class="script-badge badge-amber">Order Intake</span>
+        </div>
+        <div class="transcript-dialogue">
+          <div class="transcript-turn turn-caller">
+            <span class="transcript-speaker">👤 Caller</span>
+            <span class="transcript-text">"Is trade TRD-5002 pending or confirmed?"</span>
+          </div>
+          <div class="transcript-turn turn-tara">
+            <span class="transcript-speaker">🤖 Tara</span>
+            <span class="transcript-text">"Trade TRD-5002 for $850,000 USD is currently Pending confirmation from the executing broker."</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scenario 3: Intake Queue (DINDEX) -->
+      <div class="script-prompt-card">
+        <div class="script-card-header">
+          <span class="script-card-title"><span>📋</span> Intake Queue (DINDEX)</span>
+          <span class="script-badge badge-slate">Document Intake</span>
+        </div>
+        <div class="transcript-dialogue">
+          <div class="transcript-turn turn-caller">
+            <span class="transcript-speaker">👤 Caller</span>
+            <span class="transcript-text">"Where is my order TRD-5003? Has it been processed yet?"</span>
+          </div>
+          <div class="transcript-turn turn-tara">
+            <span class="transcript-speaker">🤖 Tara</span>
+            <span class="transcript-text">"Trade TRD-5003 is currently in the Document Indexing (DINDEX) intake queue with a same-day SLA for processing."</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scenario 4: NIGO Signature Review -->
+      <div class="script-prompt-card">
+        <div class="script-card-header">
+          <span class="script-card-title"><span>⚠️</span> NIGO Signature Review</span>
+          <span class="script-badge badge-amber">Investor Services</span>
+        </div>
+        <div class="transcript-dialogue">
+          <div class="transcript-turn turn-caller">
+            <span class="transcript-speaker">👤 Caller</span>
+            <span class="transcript-text">"Please check the status of trade TRD-5004"</span>
+          </div>
+          <div class="transcript-turn turn-tara">
+            <span class="transcript-speaker">🤖 Tara</span>
+            <span class="transcript-text">"Trade TRD-5004 is flagged as NIGO due to missing required authorized signatures. Would you like me to connect you with Investor Services?"</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scenario 5: Monies Received & Settled -->
+      <div class="script-prompt-card">
+        <div class="script-card-header">
+          <span class="script-card-title"><span>💰</span> Monies Received & Settled</span>
+          <span class="script-badge badge-green">Bank Rec Matched</span>
+        </div>
+        <div class="transcript-dialogue">
+          <div class="transcript-turn turn-caller">
+            <span class="transcript-speaker">👤 Caller</span>
+            <span class="transcript-text">"Did the funds arrive for trade TRD-5010?"</span>
+          </div>
+          <div class="transcript-turn turn-tara">
+            <span class="transcript-speaker">🤖 Tara</span>
+            <span class="transcript-text">"Yes, full settlement monies of $2,000,000 USD have been received and reconciled against Bank Reconciliation. The trade is fully settled."</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scenario 6: Overdue Monies (SUBNR) -->
+      <div class="script-prompt-card">
+        <div class="script-card-header">
+          <span class="script-card-title"><span>🚨</span> Overdue Monies (SUBNR)</span>
+          <span class="script-badge badge-purple">Cash Management</span>
+        </div>
+        <div class="transcript-dialogue">
+          <div class="transcript-turn turn-caller">
+            <span class="transcript-speaker">👤 Caller</span>
+            <span class="transcript-text">"What is the settlement status of trade TRD-5012?"</span>
+          </div>
+          <div class="transcript-turn turn-tara">
+            <span class="transcript-speaker">🤖 Tara</span>
+            <span class="transcript-text">"Monies of $3,500,000 USD for trade TRD-5012 are overdue at Settlement Date + 1 with active SUBNR exception flag. Routing to Cash Management."</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scenario 7: Cross-Account Recovery Guardrail -->
+      <div class="script-prompt-card">
+        <div class="script-card-header">
+          <span class="script-card-title"><span>🛡️</span> Cross-Account Security Lock</span>
+          <span class="script-badge badge-red">Security Lock</span>
+        </div>
+        <div class="transcript-dialogue">
+          <div class="transcript-turn turn-caller">
+            <span class="transcript-speaker">👤 Caller</span>
+            <span class="transcript-text">"What is the status of trade TRD-5005?"</span>
+          </div>
+          <div class="transcript-turn turn-tara">
+            <span class="transcript-speaker">🤖 Tara</span>
+            <span class="transcript-text">"Trade TRD-5005 does not belong to your authenticated account ACC-1001. Could you please verify the reference, or is there another trade I can check?"</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scenario 8: Trade Not Found Fallback -->
+      <div class="script-prompt-card">
+        <div class="script-card-header">
+          <span class="script-card-title"><span>❓</span> Trade Not Found Fallback</span>
+          <span class="script-badge badge-slate">Recovery Help</span>
+        </div>
+        <div class="transcript-dialogue">
+          <div class="transcript-turn turn-caller">
+            <span class="transcript-speaker">👤 Caller</span>
+            <span class="transcript-text">"What is the status of trade TRD-9999?"</span>
+          </div>
+          <div class="transcript-turn turn-tara">
+            <span class="transcript-speaker">🤖 Tara</span>
+            <span class="transcript-text">"We could not locate trade TRD-9999 on your account in ZILO Works or intake queues. Could you please double check the reference number?"</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Drawer Footer -->
+    <div class="demo-scripts-footer">
+      💡 Hover to read • Select text to copy • Type prompts into chat to test
+    </div>
+  </div>
+
+  <!-- Sticky Floating Tab on Left Edge of Screen -->
+  <div id="floating-script-drawer-btn" class="floating-script-btn" title="Click or hover to view Sample Transcripts for Testing" onclick="toggleTranscriptDrawer()">
+    <span class="floating-script-icon">💬</span>
+    <span class="floating-script-text">SAMPLE TRANSCRIPTS FOR TESTING</span>
+  </div>
+</body>
+</html>

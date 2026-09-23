@@ -1,0 +1,444 @@
+
+AI Contact Center POC: Recommended Customer Journeys, Integration Requirements, and Success Criteria
+Table of Contents
+ TOC \o "1-3" \h \z \u Executive Summary PAGEREF _Toc240306010 \h 1
+Meeting Decisions and Working Assumptions PAGEREF _Toc240306011 \h 1
+Priority 1: Investor Authentication & Customer Profile PAGEREF _Toc240306012 \h 1
+Priority 2: Deal Ticket / Transaction Confirmation Request PAGEREF _Toc240306013 \h 2
+Priority 3: Settlement Inquiry / Receipt of Monies PAGEREF _Toc240306014 \h 2
+Priority 4: Contact Center Voice Assistant PAGEREF _Toc240306015 \h 2
+Priority 5: Chat-Based Self-Service PAGEREF _Toc240306016 \h 3
+Priority 6: Intent Detection, Sentiment & Smart Routing PAGEREF _Toc240306017 \h 3
+Recommended POC Scope (Executive View) PAGEREF _Toc240306018 \h 3
+Core Journey 1 PAGEREF _Toc240306019 \h 3
+Core Journey 2 PAGEREF _Toc240306020 \h 3
+Core Journey 3 PAGEREF _Toc240306021 \h 3
+Core Journey 4 PAGEREF _Toc240306022 \h 3
+Core Journey 5 PAGEREF _Toc240306023 \h 3
+Core Journey 6 PAGEREF _Toc240306024 \h 3
+Customer Journey Data and API Requirements PAGEREF _Toc240306025 \h 4
+Journey 1: Investor Authentication & Customer Profile PAGEREF _Toc240306026 \h 5
+Required Data PAGEREF _Toc240306027 \h 5
+API Requirements PAGEREF _Toc240306028 \h 5
+Journey 2: Deal Ticket / Trade Confirmation Request PAGEREF _Toc240306029 \h 5
+Required Data PAGEREF _Toc240306030 \h 5
+API Requirements PAGEREF _Toc240306031 \h 6
+Journey 3: Settlement Inquiry / Receipt of Monies PAGEREF _Toc240306032 \h 6
+Required Data PAGEREF _Toc240306033 \h 6
+API Requirements PAGEREF _Toc240306034 \h 7
+Journey 4: Voice AI Agent PAGEREF _Toc240306035 \h 7
+Required Data PAGEREF _Toc240306036 \h 7
+API Requirements PAGEREF _Toc240306037 \h 7
+Sample Flow PAGEREF _Toc240306038 \h 8
+Journey 5: Chat AI Agent PAGEREF _Toc240306039 \h 8
+Required Data PAGEREF _Toc240306040 \h 8
+API Requirements PAGEREF _Toc240306041 \h 8
+Zilo Integration Requirements PAGEREF _Toc240306042 \h 8
+Must Have PAGEREF _Toc240306043 \h 8
+Nice to Have PAGEREF _Toc240306044 \h 9
+Recommended MVP API Scope PAGEREF _Toc240306045 \h 9
+POC Success Criteria by Customer Journey PAGEREF _Toc240306046 \h 9
+1. Investor Authentication & Customer Profile PAGEREF _Toc240306047 \h 11
+Success Criteria PAGEREF _Toc240306048 \h 11
+Demo Outcome PAGEREF _Toc240306049 \h 11
+2. Deal Ticket / Trade Inquiry PAGEREF _Toc240306050 \h 11
+Success Criteria PAGEREF _Toc240306051 \h 11
+Business Outcome PAGEREF _Toc240306052 \h 11
+3. Settlement Inquiry / Receipt of Monies PAGEREF _Toc240306053 \h 11
+Success Criteria PAGEREF _Toc240306054 \h 11
+Business Outcome PAGEREF _Toc240306055 \h 12
+4. Voice AI Contact Center Experience PAGEREF _Toc240306056 \h 12
+Success Criteria PAGEREF _Toc240306057 \h 12
+Demo Outcome PAGEREF _Toc240306058 \h 12
+5. Chat AI Experience PAGEREF _Toc240306059 \h 12
+Success Criteria PAGEREF _Toc240306060 \h 12
+Demo Outcome PAGEREF _Toc240306061 \h 12
+6. Intent Recognition, Sentiment & Smart Routing PAGEREF _Toc240306062 \h 13
+Success Criteria PAGEREF _Toc240306063 \h 13
+Executive-Level POC Success Criteria PAGEREF _Toc240306064 \h 13
+Recommended Next Steps PAGEREF _Toc240306065 \h 13
+Confirmed Actions from September 14 Checkpoint PAGEREF _Toc240306066 \h 13
+
+
+Executive Summary
+This document recommends a focused AI contact center proof of concept that demonstrates investor authentication and customer profile retrieval as a single foundational journey, followed by deal ticket and settlement inquiries delivered through consistent voice and chat experiences. The September 14 checkpoint confirmed that Statement Request is out of scope for the initial POC.
+Meeting Decisions and Working Assumptions
+• Statement Request is removed from the initial POC scope.
+• The demo will use a single-account, straight-through scenario to limit complexity.
+• Voice and chat will use a consistent authentication flow for the demo.
+• GCX will host the demo interactions. Zilo scope is limited to authentication, authorization, and one sample test.
+• The team will use a realistic mock or stub service with approved test data for the demo.
+• Deal ticket and settlement journeys remain in scope; intent recognition, sentiment detection, smart routing, and live-agent handoff are included.
+Priority 1: Investor Authentication & Customer Profile
+Journey
+Investor contacts the contact center via voice or chat.
+AI agent greets the investor and initiates authentication.
+Investor is authenticated using account number, registered contact details, and security validation.
+Upon successful authentication, the AI agent retrieves the investor profile from Zilo.
+Personalized customer context is established, enabling the agent to proceed with the requested service.
+Why Important
+Required before servicing any request.
+Critical for both voice and chat channels.
+Discussed extensively by the Google team as a prerequisite for all future workflows.
+Dushyant Ralhan specifically identified retrieving the customer profile from Zilo as a minimum integration capability for the POC.
+Desired Outcome
+Authenticate investor.
+Retrieve customer profile from Zilo (or mock service).
+Establish personalized customer context.
+Priority 2: Deal Ticket / Transaction Confirmation Request
+Journey
+Investor requests trade confirmation.
+Agent identifies customer.
+Trade information is retrieved.
+Details are presented to investor.
+Why Important
+One of the explicit examples reviewed from the business documentation.
+Priority 3: Settlement Inquiry / Receipt of Monies
+Journey
+Investor asks whether subscription funds or a wire transfer have been received and settled.
+The agent authenticates the investor and identifies the relevant account or transaction.
+The agent retrieves payment receipt, transaction, and settlement-status information.
+The agent confirms whether the funds were received, matched, and settled, or explains the current exception status.
+The request is escalated when the payment cannot be located, matched, or confirmed.
+Why Important
+Replaces the lower-value Contract / Note Inquiry journey.
+Provides a more valuable transaction-servicing scenario with greater process complexity.
+Demonstrates the agent’s ability to search across payment, subscription, bank-receipt, and settlement information.
+Priority 4: Contact Center Voice Assistant
+Journey
+Investor calls support line.
+AI voice agent greets caller.
+Agent authenticates investor.
+Agent routes directly to requested service.
+Escalates to human agent when needed.
+Why Important
+Voice-first support was repeatedly discussed as part of the future-state vision.
+Priority 5: Chat-Based Self-Service
+Journey
+Investor accesses portal.
+Chat assistant provides self-service.
+Customer receives answers or transaction support.
+Escalation path exists when confidence is low.
+Why Important
+The business vision specifically called out voice and chat capabilities.
+Priority 6: Intent Detection, Sentiment & Smart Routing
+Journey
+Investor contacts support.
+AI determines the reason for inquiry and detects sentiment or frustration signals.
+Appropriate workflow is selected automatically.
+Request is fulfilled, routed, or transferred to a live agent when escalation criteria are met.
+Why Important
+Central to the Agentic AI model discussed by Google.
+Recommended POC Scope (Executive View)
+Given the target demo date of October 5th, 2026, the POC should focus on six confirmed capabilities: authentication and customer profile retrieval, deal ticket inquiry, settlement inquiry / receipt of monies, voice, chat, and intent recognition with smart routing and escalation.
+Core Journey 1
+✅ Investor Authentication & Customer Profile
+Core Journey 2
+✅ Deal Ticket / Trade Confirmation Request
+Core Journey 3
+✅ Settlement Inquiry / Receipt of Monies
+Core Journey 4
+✅ Voice + Chat Interface Demonstration
+Core Journey 5
+✅ Intent Recognition, Sentiment & Smart Routing
+Core Journey 6
+✅ Zilo Integration (or mocked Zilo API)
+These six journeys would demonstrate:
+Authentication & customer profile retrieval
+Data access
+AI conversation handling
+Voice channels
+Chat channels
+Integration architecture
+This scope aligns with the decisions recorded during the September 14 checkpoint. Zilo connectivity will be attempted for authentication, authorization, and customer profile retrieval; if unavailable, the same interface will be supported through a realistic mock or stub service.
+The next deliverable should be a Customer Journey Matrix that maps each journey to business value, required Zilo data, APIs, personas, success criteria, and demo scenarios. This matrix will support scope validation and implementation planning with the team.
+The exact APIs remain subject to Zilo discovery. For the initial POC, the minimum integration boundary is authentication, authorization, customer profile retrieval, trade information, settlement status, and workflow orchestration. All demo user interactions will be presented through GCX; deeper Zilo portal integration is deferred.
+Customer Journey Data and API Requirements
+Customer Journey
+	Required Data
+	Likely API / Integration Need
+	Priority
+	Investor Authentication & Customer Profile
+	Investor ID, Account Number, Email, Phone Number, Authentication Status, MFA Questions
+	Authentication API, Identity Validation API, Session Token API
+	P1
+	Customer Profile (part of Authentication)
+	Customer Profile, Contact Information, Account Relationships, Investor Type, Account Status
+	Customer Profile API
+	P1
+	Deal Ticket / Trade Confirmation Request
+	Trade ID, Transaction History, Settlement Status, Fund Information
+	Trade Inquiry API, Transaction API
+	P1
+	Settlement Inquiry / Receipt of Monies
+	Investor and account identifiers, subscription or transaction reference, payment amount, value date, bank receipt status, matching status, settlement status, exception reason
+	Payment Receipt API, Subscription Transaction API, Cash Matching API, Settlement Status API
+	P1
+	Voice Contact Center Journey
+	Authentication Data, Customer Context, Case History
+	Voice Gateway Integration, AI Agent API, Customer Context API
+	P1
+	Chat Contact Center Journey
+	Customer Session Data, Chat History, Authentication Context
+	Chat Widget Integration, AI Agent API
+	P1
+	Intent, Sentiment & Smart Routing
+	Request Type, Customer Intent, Sentiment Signal, Priority Level, Escalation Trigger
+	Case Routing API, Workflow API
+	P2
+	Journey 1: Investor Authentication & Customer Profile
+Required Data
+Account Number
+Investor Identifier
+Registered Email
+Registered Phone
+Authentication preferences
+Security validation information
+Customer Profile Data
+The following fields are retrieved immediately after authentication to establish customer context:
+Customer name, contact information, account status, account relationships, and investor profile.
+API Requirements
+Authentication is the foundational first step for all service journeys. Customer profile retrieval occurs immediately after successful authentication, establishing the context required to fulfil any subsequent request. Both steps form a single end-to-end investor interaction.
+Minimum POC APIs
+Authenticate Customer
+Validate Investor Identity
+Retrieve Authentication Status
+Get Customer Profile
+Get Account Details
+Search Customer
+Demo Outcome
+The investor calls or starts a chat, authenticates successfully, and the AI agent immediately retrieves their profile from Zilo — establishing personalized context before proceeding to the requested service. The agent states: "I've verified your identity and pulled up your account. How can I help you today?"
+Journey 2: Deal Ticket / Trade Confirmation Request
+Required Data
+Transaction Details
+Fund Information
+Trade Date
+Settlement Status
+Confirmation Number
+API Requirements
+Deal ticket receipt was explicitly referenced in the documents reviewed by the team.
+Minimum POC APIs
+Retrieve Trade
+Trade Confirmation Lookup
+Transaction History Query
+Demo Scenario Investor requests confirmation of a recent trade and the AI agent returns transaction details.
+Knowledge Articles Required
+Top 10 Queries #1 – Deal Ticket Receipt and #9 – Trade Date Confirmation (current process: AWD, IFAST). These procedure documents should be loaded into the agent knowledge base as guardrail sources.
+Required job aids: NIGO queue handling, DINDEX status procedures, dealing queue lookup steps, and trade confirmation response standards.
+Escalation Conditions
+Trade is in the NIGO queue and requires manual review or comments update.
+Duplicate trade detected or multiple matching records found.
+Trade cannot be located in pending or processed screens.
+Complex settlement scenario, fund restriction, or account stop is present.
+Journey 3: Settlement Inquiry / Receipt of Monies
+Required Data
+Investor identifier
+Account number
+Subscription or transaction reference
+Payment amount and currency
+Payment or value date
+Bank account or wire reference
+Receipt-of-funds status
+Cash-matching status
+Settlement status
+Exception or rejection reason
+API Requirements
+The journey should determine whether subscription funds or a wire transfer have reached the relevant bank account and completed the settlement process.
+Minimum POC APIs
+Search Payment or Wire Transfer
+Retrieve Subscription Transaction
+Retrieve Receipt-of-Funds Status
+Retrieve Cash-Matching Status
+Retrieve Settlement Status
+Retrieve Settlement Exception Details
+Demo Scenario An authenticated investor asks whether funds submitted for a subscription have been received and settled. The AI agent locates the relevant payment, confirms the receipt and matching status, and returns the settlement outcome. If the payment cannot be located or is pending investigation, the agent explains the status and initiates the approved escalation path.
+Knowledge Articles Required
+Top 10 Queries #7 – Receipt of Monies (current process: AWD, IFAST, Bank Rec). This procedure document should be loaded into the agent knowledge base as a guardrail source.
+Required job aids: daily bank reconciliation file procedures, SUBNR outstanding monies file handling, settlement date plus 1 escalation rules, and cash-matching exception responses.
+Escalation Conditions
+Payment cannot be located in the bank rec file or Zilo transaction records.
+Cash-matching exception, mismatch, or rejection is flagged on the transaction.
+Settlement is at date-plus-1 and the transaction appears on the SUBNR outstanding file.
+Wire transfer discrepancy or unidentified payment requires operations investigation.
+Journey 4: Voice AI Agent
+Required Data
+Authentication Context
+Customer Profile
+Conversation Context
+Contact History
+API Requirements
+Google described voice interactions as a key capability of the future-state solution.
+Integration Components
+Telephony Platform (US region for the demo)
+Speech-to-Text
+AI Agent Runtime
+Customer Data APIs
+Workflow APIs
+Sample Flow
+Customer calls.
+Authenticate investor.
+Retrieve profile.
+Fulfill request.
+Escalate to human agent if necessary.
+Journey 5: Chat AI Agent
+Required Data
+Customer Session
+User Profile
+Knowledge Responses
+Service Request Data
+API Requirements
+The vision documents discussed voice and chat-first interactions.
+Integration Components
+Chat Widget
+AI Agent Platform
+Customer Context APIs
+Zilo Data APIs
+Zilo Integration Requirements
+From the meeting discussion, the following Zilo integrations appear most important for the POC:
+Must Have
+✅ Authentication support✅ Customer profile retrieval✅ Account lookup✅ Trade information retrieval✅ Settlement and receipt-of-monies status retrieval
+Data Source Strategy
+For the initial POC, the design will attempt a limited Zilo interaction for authentication, authorization, and customer profile retrieval. If connectivity or test data is not available, the team will use a mocked or stubbed Zilo service backed by approved test data. Existing IFAST and AWD flows will not be integrated into the demo; their future-state equivalents are Zilo and Zilo Work.
+Nice to Have
+✅ Workflow creation✅ Case management updates✅ Note creation✅ Transaction submission
+Recommended MVP API Scope
+To keep the POC achievable within the short timeline discussed during the meeting, the minimum API set would be:
+Authenticate Investor
+Get Customer Profile
+Get Account Information
+Get Trade Details
+Get Receipt-of-Funds Status
+Get Cash-Matching Status
+Get Settlement Status
+Create/Update Service Request
+Customer Search
+This scope supports the confirmed customer journeys while keeping the build focused on an achievable end-to-end demonstration.
+The POC should demonstrate that an AI-powered contact center can authenticate an investor, retrieve customer context from Zilo or a realistic mock service, complete the selected servicing journeys through voice and chat, identify intent and sentiment, and escalate to a human agent when required.
+POC Success Criteria by Customer Journey
+Customer Journey
+	Success Criteria
+	Functional / Non-Functional
+	Investor Authentication & Customer Profile
+	Investor is authenticated and the AI agent immediately retrieves the investor profile from Zilo, establishing personalized contexts for all subsequent service interactions.
+	Functional
+	Deal Ticket / Trade Inquiry
+	AI agent retrieves trade information and provides a correct response to the investor.
+	Functional
+	Settlement Inquiry / Receipt of Monies
+	The AI agent identifies the relevant payment or subscription transaction and accurately confirms whether the funds were received, matched, and settled. If the transaction cannot be confirmed, the agent provides the approved exception response and escalates appropriately.
+	Functional
+	Voice Assistant Journey
+	Investor completes an end-to-end interaction using voice without requiring manual intervention for standard inquiries.
+	Functional
+	Chat Assistant Journey
+	Investor completes the same service requests through chat with a consistent experience.
+	Functional
+	Intent, Sentiment & Smart Routing
+	AI identifies intent, detects escalation signals, selects the correct workflow, and transfers to a human agent when required.
+	Non-Functional*
+	Non-Functional Requirement Feature*
+	Priority Ranking
+	Omni Channel Omnichannel Routing 
+	 
+	Omni Channel Omni Channel Outbound Campaigns 
+	 
+	Omni Channel Skills and Proficiency Routing 
+	 
+	Omni Channel Task Management 
+	 
+	Omni Channel Rules Engine 
+	 
+	Agentic & Conversational AI Authentication-Aware Personalization 
+	 
+	Agentic & Conversational AI Content Safety and Policy Guardrails 
+	 
+	Agentic & Conversational AI Conversation Summarization and Case Notes 
+	 
+	Agentic & Conversational AI Multilingual Understanding and Generation 
+	 
+	Analytics & Insights Call Recording 
+	 
+	Analytics & Insights Data Redaction 
+	 
+	Analytics & Insights Real-Time and Historical Analytics 
+	 
+	Analytics & Insights Dashboards 
+	 
+	Responsible AI, Privacy & Compliance Regulatory Compliance in Local Markets 
+	 
+	Responsible AI, Privacy & Compliance Data Classification and Handling 
+	 
+	Responsible AI, Privacy & Compliance PII / PCI Detection and Masking 
+	 
+	Responsible AI, Privacy & Compliance Privacy Notice and Customer Consent 
+	 
+	Responsible AI, Privacy & Compliance Audit Logging and Monitoring 
+	 
+	1. Investor Authentication & Customer Profile
+Discussion Context The team identified authentication as a foundational capability, especially for phone interactions, and discussed how customers would authenticate before accessing account-specific information.
+Success Criteria
+✅ Investor identity can be validated.✅ Authentication workflow completes successfully.✅ AI can proceed to customer-specific servicing actions.✅ Authentication process works consistently across voice and chat channels.
+Demo Outcome
+Investor calls or starts a chat, authenticates successfully, and the AI agent immediately retrieves and confirms their profile from Zilo. The agent states: "I've verified your identity and pulled up your account. How can I help you today?"
+
+2. Deal Ticket / Trade Inquiry
+Discussion Context Deal ticket receipt was reviewed as one of the common customer service scenarios.
+Success Criteria
+✅ Investor requests deal information.✅ AI retrieves relevant trade details.✅ Trade data is presented accurately.✅ Conversation completes successfully without escalation.
+Business Outcome
+Shows ability to support transactional inquiries using customer-specific data.
+
+3. Settlement Inquiry / Receipt of Monies
+Discussion Context The stakeholders agreed to remove Contract / Note Inquiry because contract notes are expected to move toward digital self-service. Settlement inquiries and receipt-of-monies requests were selected as the replacement because they provide greater servicing value and demonstrate a more meaningful transaction-status workflow.
+Success Criteria
+✅ The investor can ask whether subscription funds or a wire transfer were received.✅ The AI agent identifies the correct account and transaction.✅ The AI agent retrieves the receipt-of-funds, matching, and settlement status.✅ The response accurately distinguishes received, matched, settled, pending, rejected, and not-found outcomes.✅ The agent follows the approved escalation process when the payment cannot be confirmed or requires investigation.✅ The conversation completes through voice or chat using the same underlying business rules.
+Business Outcome
+Demonstrates transaction-level servicing across payment receipt, cash matching, and settlement while reducing manual status inquiries handled by operations.
+
+4. Voice AI Contact Center Experience
+Discussion Context The future-state vision reviewed by the team included voice-first servicing capabilities.
+Success Criteria
+✅ Voice call received by AI agent.✅ Authentication completed.✅ Customer request understood correctly.✅ Appropriate workflow executed.✅ Response delivered naturally.✅ Escalation path available when required.
+Demo Outcome
+End-to-end voice conversation for a deal ticket or settlement inquiry.
+
+5. Chat AI Experience
+Discussion Context The reviewed vision documents referenced both voice and chat channels. Rob Cox also discussed handling channels independently while maintaining a single agent experience.
+Success Criteria
+✅ Customer initiates chat.✅ AI understands intent.✅ Customer serviced without agent involvement.✅ Consistent responses across voice and chat.
+Demo Outcome
+Investor requests a deal ticket or settlement inquiry via chat and receives a successful response.
+
+6. Intent Recognition, Sentiment & Smart Routing
+Discussion Context The Google team emphasized user journeys and workflow-driven servicing, where AI determines the customer's intent and selects the correct workflow.
+Success Criteria
+✅ AI identifies customer intent correctly.✅ Correct workflow selected automatically.✅ Customer receives expected outcome.✅ Escalation occurs when confidence is insufficient.
+
+Executive-Level POC Success Criteria
+The POC will be considered successful when it demonstrates functioning voice and chat channels, investor authentication, customer profile retrieval, the selected deal ticket and settlement journeys completed end-to-end, Zilo or realistic mock integration, AI-driven intent and sentiment recognition, workflow execution, and human-agent escalation when required.
+✅ Voice and chat channels functioning.
+✅ Investor authentication and customer profile retrieval.
+✅ Deal ticket and settlement journeys working end-to-end.
+✅ Integration with Zilo (or a realistic mock service).
+✅ AI-driven intent and sentiment recognition, workflow execution, and live-agent handoff.
+✅ Minimal human intervention for standard inquiries.
+✅ Architecture that can scale to future retail investor volumes.
+✅ Operational dashboard displaying call volumes, intent distribution, escalation rates, and handling times (GCX Insights or equivalent BI tooling).
+These success criteria align with the stated business objectives, program direction, and proposed solution approach.
+Recommended Next Steps
+Confirmed Actions from September 14 Checkpoint
+Mark Healy: coordinate the Zilo technical discussion and provide authentication/authorization inputs and outputs, plus available Zilo, Zilo Work, and settlement screenshots.
+Ali Naib: publish the updated scope, workstream structure, owners, and execution plan.
+Sonali Mandal: update mock data and workflows to reflect Zilo and Zilo Work field mappings.
+Sriram Piratla: resend the feature and metrics matrix, including intent, sentiment, and routing requirements.
+Google team: review the updated journey documents and use them to support the working prototype; Rob Cox will also assess additional resource support.
+Business and operations team: provide the detailed SOP, persona guidance, job aids, and available sample conversation scripts or transcripts.
+Confirm the two-to-three-week POC scope and select the final two or three end-to-end service journeys.
+Validate Zilo data availability and API ownership with the Zilo team.
+Decide which integrations will be live and which will use realistic mock services.
+Define measurable acceptance thresholds for authentication, intent recognition, data accuracy, workflow completion, and escalation.
+Assign owners and target dates for the Customer Journey Matrix, architecture design, test data, and demo plan.
+Collect knowledge articles, SOPs, job aids, and sample conversation scripts for the two business journeys (Deal Ticket and Settlement Inquiry). These are required inputs to agent design, prompt engineering, persona definition, and guardrails.
+Define per-journey escalation conditions based on existing call centre procedures and the edge cases identified in the Top 10 Queries documentation (NIGO queue, SUBNR file, PENDING state, cash-matching exceptions).
+Confirm the Zilo discovery outcome and decide whether the POC will use live authentication/profile retrieval or the approved mock service. Defer AWD/IFAST integration from the initial demo.
+Include the GCX Insights operational dashboard in the demo plan to demonstrate contact centre oversight capability (call volumes, escalation rates, handling times).

@@ -1,0 +1,39 @@
+{
+  "deployments": [
+    {
+      "name": "projects/gcex-contact-center-508117/locations/us/apps/954f9664-9865-4fdc-9ced-751589097442/deployments/2ae2a272-034d-4f40-b364-d96457379a80",
+      "appVersion": "projects/gcex-contact-center-508117/locations/us/apps/954f9664-9865-4fdc-9ced-751589097442/versions/a3163750-a2bb-42ab-b136-09e764782f7d",
+      "channelProfile": {
+        "channelType": "GOOGLE_TELEPHONY_PLATFORM",
+        "disableDtmf": false,
+        "disableBargeInControl": false
+      },
+      "createTime": "2026-09-23T16:59:43.193462Z",
+      "updateTime": "2026-09-23T17:11:43.324181Z",
+      "etag": "q5sJNtpErNElYx7IWBxg9cirVe2WU5Ybiv3dZmFv1U0=",
+      "displayName": "Voice_0.1"
+    },
+    {
+      "name": "projects/gcex-contact-center-508117/locations/us/apps/954f9664-9865-4fdc-9ced-751589097442/deployments/56962e42-84e1-4aa2-8932-a15ad9ea4e75",
+      "appVersion": "projects/gcex-contact-center-508117/locations/us/apps/954f9664-9865-4fdc-9ced-751589097442/versions/a3163750-a2bb-42ab-b136-09e764782f7d",
+      "channelProfile": {
+        "channelType": "WEB_UI",
+        "disableDtmf": false,
+        "disableBargeInControl": false,
+        "webWidgetConfig": {
+          "modality": "CHAT_AND_VOICE",
+          "theme": "LIGHT",
+          "webWidgetTitle": "Tara",
+          "securitySettings": {
+            "enablePublicAccess": true
+          }
+        }
+      },
+      "createTime": "2026-09-23T19:38:16.379793Z",
+      "updateTime": "2026-09-23T20:24:32.615968Z",
+      "etag": "aPt6KPrtmexX4WpCkTzl363hHVC5rHuxSmWzgQJG/2k=",
+      "displayName": "Web Channel",
+      "experimentConfig": {}
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "projects/gcex-contact-center-508117/locations/us/apps/db6b068d-3cc1-4fcb-82be-1d3b059db67e/tools/issue_otp_challenge",
+  "createTime": "2026-09-23T17:51:26.712672Z",
+  "updateTime": "2026-09-23T17:51:26.712672Z",
+  "pythonFunction": {
+    "name": "issue_otp_challenge",
+    "pythonCode": "\"\"\"Tool for issuing MFA OTP challenges.\"\"\"\n\ndef issue_otp_challenge(account_no: str = \"\", channel: str = \"chat\", target_contact: str = \"\") -> dict:\n    \"\"\"Issues a 6-digit MFA OTP challenge via Email or SMS.\n\n    Args:\n        account_no: Investor account number.\n        channel: Delivery channel (chat -> email, voice -> sms).\n        target_contact: Masked contact address.\n\n    Returns:\n        dict: Challenge dispatch status and agent_action.\n    \"\"\"\n    try:\n        masked = target_contact or (\"s.***@apexglobal.com\" if channel == \"chat\" else \"+1-***-***-0142\")\n        return {\n            \"status\": \"challenge_issued\",\n            \"account_no\": account_no,\n            \"channel\": channel,\n            \"target_contact_masked\": masked,\n            \"otp_length\": 6,\n            \"validity_minutes\": 5,\n            \"message\": f\"A 6-digit verification code has been sent to {masked}.\",\n            \"agent_action\": \"Prompt the user to provide the 6-digit verification code received.\"\n        }\n    except Exception as e:\n        return {\n            \"status\": \"error\",\n            \"message\": str(e),\n            \"agent_action\": \"Route to Technical Support using escalate_interaction.\"\n        }\n",
+    "description": "Issues a 6-digit MFA OTP challenge via Email or SMS.\n\nArgs:\n    account_no: Investor account number.\n    channel: Delivery channel (chat -> email, voice -> sms).\n    target_contact: Masked contact address.\n\nReturns:\n    dict: Challenge dispatch status and agent_action."
+  },
+  "executionType": "SYNCHRONOUS",
+  "displayName": "issue_otp_challenge",
+  "etag": "lhOTj7vroklca1EcyqyJdqcoQHVsZC1BFgYcUP3Hym4="
+}
