@@ -6,7 +6,7 @@
   <title>State Street | Transfer Agency Operations & AI Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,600;0,6..72,700;1,6..72,700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --stt-navy: #020b5b;
@@ -28,6 +28,8 @@
       --stt-danger-bg: #fde8e8;
       --stt-danger-text: #a6100f;
     }
+
+
 
     * {
       box-sizing: border-box;
@@ -177,12 +179,12 @@
     /* ==========================================================================
        APP VIEW (Authenticated State Street Portal)
        ========================================================================== */
-    /* Unified Global Container for exact same width across all sections */
+    /* Unified Global Container for exact same centered width across all sections */
     .stt-container {
       width: 100%;
-      max-width: 100%;
-      margin: 0;
-      padding: 0 2.5rem;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
       box-sizing: border-box;
     }
 
@@ -830,59 +832,310 @@
     }
 
     /* ==========================================================================
-       TAB 2: AI CHAT ASSISTANT / CHAT WIDGET WORKSPACE VIEW
+       AUTHENTIC STATE STREET CORPORATE HOMEPAGE STYLES
        ========================================================================== */
-    #tab-chat {
-      display: block;
+    .stt-corp-hero-section {
       width: 100%;
-      margin: 2.5rem 0 4rem 0;
-      padding: 0;
+      padding: 1.5rem 0 1rem 0;
+      background: #ffffff;
       box-sizing: border-box;
-      flex: 1;
     }
 
-    .chat-layout {
+    .stt-corp-hero-banner {
+      position: relative;
+      width: 100%;
+      min-height: 440px;
+      background: #fdfaf6 url('/wealth-image-hero.jpg') center right / cover no-repeat;
+      display: flex;
+      align-items: center;
+      padding: 2.75rem 2.5rem;
+      box-sizing: border-box;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+    }
+
+    .stt-corp-hero-card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 440px;
+      padding: 3rem 2.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      box-sizing: border-box;
+    }
+
+    .stt-corp-hero-title {
+      font-family: 'Newsreader', 'Playfair Display', Georgia, serif;
+      font-size: 2.35rem;
+      font-weight: 700;
+      line-height: 1.15;
+      color: #001aff;
+      margin: 0 0 1.25rem 0;
+      letter-spacing: -0.02em;
+    }
+
+    .stt-corp-hero-desc {
+      font-size: 0.98rem;
+      line-height: 1.6;
+      color: #1e293b;
+      margin: 0 0 2rem 0;
+      font-weight: 400;
+    }
+
+    .stt-corp-btn-solid {
+      display: inline-block;
+      background-color: #001aff;
+      color: #ffffff;
+      padding: 0.85rem 2.2rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.15s ease;
+      border-radius: 0;
+    }
+    .stt-corp-btn-solid:hover {
+      background-color: #020b5b;
+    }
+
+    .stt-corp-section {
+      padding: 3.5rem 0;
+      box-sizing: border-box;
+      background: #ffffff;
+    }
+
+    .stt-corp-grid {
+      display: grid;
+      grid-template-columns: 180px 1.4fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .stt-corp-section-heading {
+      font-family: 'Newsreader', 'Playfair Display', Georgia, serif;
+      font-size: 2.15rem;
+      font-weight: 700;
+      color: #001aff;
+      margin: 0;
+      line-height: 1.15;
+    }
+
+    .stt-corp-col-image {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .stt-corp-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    }
+
+    .stt-corp-col-content {
       display: flex;
       flex-direction: column;
-      max-width: 1080px;
-      margin: 0 auto;
-      min-height: 720px;
-      width: 100%;
-      box-sizing: border-box;
+      align-items: flex-start;
+      gap: 1.25rem;
     }
 
-    /* Main Chat Container where user or CES widget will be plugged */
-    .chat-widget-card {
-      min-width: 0;
+    .stt-corp-item-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #001aff;
+      margin: 0;
+      line-height: 1.25;
+    }
+
+    .stt-corp-item-desc {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #334155;
+      margin: 0;
+    }
+
+    .stt-corp-btn-outline {
+      display: inline-block;
+      background: transparent;
+      border: 1.5px solid #001aff;
+      color: #001aff;
+      padding: 0.75rem 2.2rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      border-radius: 0;
+    }
+    .stt-corp-btn-outline:hover {
+      background-color: #001aff;
+      color: #ffffff;
+    }
+
+    .stt-corp-divider {
+      border: none;
+      border-top: 1px solid #e2e8f0;
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+
+    /* Top navbar navigation link with caret */
+    .ssmp-nav-link {
+      color: #1e293b;
+      font-size: 0.92rem;
+      font-weight: 500;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: color 0.15s ease;
+    }
+    .ssmp-nav-link:hover {
+      color: #001aff;
+    }
+
+    .ssmp-header-search-box {
+      display: flex;
+      align-items: center;
+      border-bottom: 2px solid #001aff;
+      padding: 2px 8px;
+      gap: 8px;
+      width: 170px;
+    }
+    .ssmp-header-search-box input {
+      border: none;
+      outline: none;
+      font-size: 0.9rem;
+      color: #1e293b;
       width: 100%;
-      max-width: 100%;
+      background: transparent;
+    }
+    .ssmp-header-search-box .search-icon {
+      color: #001aff;
+      font-size: 1rem;
+    }
+
+    @media (max-width: 1024px) {
+      .stt-corp-grid {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+      }
+      .stt-corp-hero {
+        background-position: center;
+      }
+      .stt-corp-hero-card {
+        max-width: 100%;
+        padding: 2.5rem 1.75rem;
+      }
+    }
+
+    /* ==========================================================================
+       FLOATING CORNER AI CHAT LAUNCHER & WIDGET (Tara Virtual Specialist)
+       ========================================================================== */
+    .portal-chat-launcher {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #020b5b 0%, #001aff 100%);
+      box-shadow: 0 8px 24px rgba(2, 11, 91, 0.35), 0 2px 6px rgba(0, 0, 0, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 9999;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+    }
+    .portal-chat-launcher:hover {
+      transform: scale(1.08);
+      box-shadow: 0 12px 30px rgba(0, 26, 255, 0.45);
+    }
+    .portal-chat-launcher .launcher-icon {
+      width: 28px;
+      height: 28px;
+      fill: #ffffff;
+      display: block;
+      transition: transform 0.2s ease;
+    }
+    .portal-chat-launcher.is-open .launcher-icon {
+      display: none;
+    }
+    .portal-chat-launcher .launcher-close-icon {
+      display: none;
+      font-size: 26px;
+      color: #ffffff;
+      line-height: 1;
+      font-weight: 300;
+    }
+    .portal-chat-launcher.is-open .launcher-close-icon {
+      display: block;
+    }
+    .portal-chat-badge {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      width: 14px;
+      height: 14px;
+      background-color: #00d26a;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px rgba(0, 210, 106, 0.3);
+    }
+
+    /* Floating Corner Chat Dialog Window */
+    .portal-chat-window {
+      position: fixed;
+      bottom: 96px;
+      right: 24px;
+      width: 440px;
+      height: 640px;
+      max-height: calc(100vh - 120px);
+      max-width: calc(100vw - 32px);
       background: #ffffff;
-      border: 1px solid var(--stt-border);
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+      border-radius: 16px;
+      box-shadow: 0 18px 48px rgba(2, 11, 91, 0.28), 0 4px 12px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(2, 11, 91, 0.12);
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      box-sizing: border-box;
+      z-index: 10000;
+      opacity: 0;
+      transform: translateY(20px) scale(0.96);
+      pointer-events: none;
+      transition: opacity 0.22s ease, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .portal-chat-window.is-open {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
     }
 
-    .chat-widget-header {
-      background-color: var(--stt-navy);
+    .portal-chat-header {
+      background: linear-gradient(135deg, #020b5b 0%, #08216b 100%);
       color: #ffffff;
-      padding: 1.25rem 1.75rem;
+      padding: 0.9rem 1.15rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
-
-    .chat-agent-info {
+    .portal-chat-header-info {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.75rem;
     }
-
-    .chat-agent-avatar {
-      width: 44px;
-      height: 44px;
+    .portal-chat-avatar {
+      width: 38px;
+      height: 38px;
       background: #001aff;
       color: #ffffff;
       border-radius: 50%;
@@ -890,31 +1143,239 @@
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      font-size: 1.1rem;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      font-size: 1rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+      position: relative;
     }
-
-    .chat-agent-title {
-      font-size: 1.1rem;
+    .portal-chat-avatar-dot {
+      position: absolute;
+      bottom: -1px;
+      right: -1px;
+      width: 10px;
+      height: 10px;
+      background: #00d26a;
+      border: 2px solid #020b5b;
+      border-radius: 50%;
+    }
+    .portal-chat-title-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .portal-chat-title {
+      font-size: 0.92rem;
       font-weight: 700;
+      color: #ffffff;
     }
-
-    .chat-agent-subtitle {
-      font-size: 0.75rem;
-      color: #b0c4de;
+    .portal-chat-subtitle {
+      font-size: 0.7rem;
+      color: #9cb5db;
     }
-
-    .chat-status-pill {
-      background: rgba(74, 222, 128, 0.2);
-      color: #4ade80;
-      padding: 0.3rem 0.75rem;
-      border-radius: 9999px;
-      font-size: 0.725rem;
-      font-weight: 600;
+    .portal-chat-header-actions {
       display: flex;
       align-items: center;
-      gap: 0.4rem;
-      border: 1px solid rgba(74, 222, 128, 0.3);
+      gap: 0.45rem;
+    }
+    .portal-chat-head-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .portal-chat-head-btn:hover {
+      background: rgba(255, 255, 255, 0.28);
+    }
+    .portal-chat-close-btn {
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      font-size: 1.25rem;
+      line-height: 1;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+      opacity: 0.8;
+      transition: opacity 0.15s ease, background 0.15s ease;
+    }
+    .portal-chat-close-btn:hover {
+      opacity: 1;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Quick Prompts bar */
+    .portal-quick-chips {
+      padding: 0.5rem 0.85rem;
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      gap: 0.45rem;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: thin;
+    }
+    .portal-quick-chip {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 9999px;
+      padding: 3px 9px;
+      font-size: 0.7rem;
+      color: #0b1f3a;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+    .portal-quick-chip:hover {
+      background: #e0f2fe;
+      border-color: #0284c7;
+      color: #0369a1;
+    }
+
+    /* Attachment Preview Bar */
+    .portal-attachment-preview {
+      display: none;
+      padding: 6px 12px;
+      background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      align-items: center;
+      gap: 8px;
+    }
+    .portal-attachment-preview.active {
+      display: flex;
+    }
+    .attachment-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #e0f2fe;
+      border: 1px solid #bae6fd;
+      color: #0369a1;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      max-width: 100%;
+    }
+    .attachment-chip-icon {
+      font-size: 1rem;
+    }
+    .attachment-chip-name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 220px;
+    }
+    .attachment-chip-size {
+      color: #64748b;
+      font-size: 0.68rem;
+      font-weight: 500;
+    }
+    .attachment-chip-remove {
+      background: none;
+      border: none;
+      color: #0369a1;
+      cursor: pointer;
+      font-size: 14px;
+      padding: 0 2px;
+      line-height: 1;
+      opacity: 0.7;
+    }
+    .attachment-chip-remove:hover {
+      opacity: 1;
+      color: #b91c1c;
+    }
+
+    /* Input bar */
+    .portal-chat-input-bar {
+      padding: 0.75rem 1rem;
+      background-color: #ffffff;
+      border-top: 1px solid var(--stt-border);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-portal-attach {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 18px;
+      color: #475569;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+    .btn-portal-attach:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+      border-color: #94a3b8;
+    }
+    .portal-chat-input {
+      flex: 1;
+      padding: 0.65rem 0.9rem;
+      border: 1px solid var(--stt-border);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+    .portal-chat-input:focus {
+      border-color: var(--stt-electric-blue);
+      box-shadow: 0 0 0 2px rgba(0, 26, 255, 0.12);
+    }
+    .btn-portal-send {
+      background: linear-gradient(135deg, #020b5b 0%, #001aff 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.65rem 1.15rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s ease;
+      flex-shrink: 0;
+    }
+    .btn-portal-send:hover {
+      opacity: 0.92;
+    }
+
+    /* Chat File Attachment in Bubbles */
+    .chat-file-attachment {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 6px;
+      padding: 6px 10px;
+      margin-bottom: 6px;
+      font-size: 0.78rem;
+    }
+    .bubble-agent .chat-file-attachment {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+      color: #0f172a;
+    }
+
+    @media (max-width: 600px) {
+      .portal-chat-window {
+        right: 8px;
+        left: 8px;
+        width: auto;
+        bottom: 88px;
+        height: calc(100vh - 110px);
+      }
     }
 
     /* Chat Messages Box */
@@ -1828,50 +2289,136 @@
        ======================================================================== -->
   <div id="app-view">
 
-    <!-- Global Utility Header -->
+    <!-- Global Utility Header (Matching State Street Layout) -->
     <nav class="ssmp-header__global-nav">
       <div class="stt-container ssmp-global-inner">
         <div class="ssmp-global-left">
-          <div class="ssmp-clr-item">🌐 United States (English) ▾</div>
-          <div class="ssmp-clr-item">Institutional Transfer Agency ▾</div>
+          <div class="ssmp-clr-item">United States ⌵</div>
         </div>
         <div class="ssmp-global-right">
+          <a href="#" class="ssmp-clr-item" onclick="return false;" style="text-decoration:none; color:inherit;">Contact us</a>
+          <span style="color:#cbd5e1;">•</span>
+          <div class="ssmp-clr-item">Company websites ⌵</div>
+          <span style="color:#cbd5e1;">•</span>
           <div class="user-pill" id="active-user-badge">User: admin</div>
           <button class="btn-logout" onclick="handleLogout()">Sign Out</button>
         </div>
       </div>
     </nav>
 
-    <!-- Primary Navigation Bar with 2 Main Tabs -->
+    <!-- Primary Navigation Bar (Matching Screenshot) -->
     <header class="ssmp-header">
       <div class="stt-container ssmp-header-inner">
         <div class="ssmp-header__logo-row">
-          <img src="/state-street-logo.svg" alt="State Street" class="ssmp-logo-img">
+          <img src="/state-street-logo.svg" alt="State Street" class="ssmp-logo-img" onclick="switchMainTab('home')" style="cursor:pointer;">
+          
+          <!-- Corporate Menu Links -->
+          <div style="display: flex; align-items: center; gap: 0.25rem; margin-left: 0.75rem;">
+            <a href="#" class="ssmp-nav-link" onclick="switchMainTab('home'); return false;">Insights ⌵</a>
+            <a href="#" class="ssmp-nav-link" onclick="switchMainTab('home'); return false;">Solutions ⌵</a>
+            <a href="#" class="ssmp-nav-link" onclick="switchMainTab('home'); return false;">About ⌵</a>
+          </div>
+
+          <div style="height: 24px; width: 1px; background: #e2e8f0; margin: 0 0.5rem;"></div>
+
+          <!-- Application Views Tabs: Home vs Operations -->
           <ul class="ssmp-nav-tabs">
             <li>
-              <button class="ssmp-nav-tab-btn active" id="nav-btn-chat" onclick="switchMainTab('chat')">
-                💬 AI Chat Assistant
+              <button class="ssmp-nav-tab-btn active" id="nav-btn-home" onclick="switchMainTab('home')">
+                Home
               </button>
             </li>
             <li>
               <button class="ssmp-nav-tab-btn" id="nav-btn-operations" onclick="switchMainTab('operations')">
-                💼 Operations <span class="tab-badge" id="badge-total-records">65 Records</span>
+                💼 Operations
               </button>
             </li>
           </ul>
         </div>
+
         <div class="ssmp-header__actions">
+          <!-- Search input matching screenshot -->
+          <div class="ssmp-header-search-box">
+            <input type="text" placeholder="Search" onkeydown="if(event.key==='Enter') { togglePortalChat(true); injectPrompt(this.value); }">
+            <span class="search-icon">🔍</span>
+          </div>
           <button class="btn-reset-demo" onclick="handleReset()">
-            ↺ Reset Demo Baseline
+            ↺ Reset Baseline
           </button>
         </div>
       </div>
     </header>
 
     <!-- ======================================================================
-         TAB 1: OPERATIONS
+         TAB: AUTHENTIC STATE STREET HOMEPAGE (MATCHING SCREENSHOT)
          ====================================================================== -->
-    <div id="tab-operations">
+    <div id="tab-home" style="display: block;">
+      <!-- Hero Banner: Leading the future of wealth (Contained & Centered) -->
+      <section class="stt-corp-hero-section">
+        <div class="stt-container">
+          <div class="stt-corp-hero-banner">
+            <div class="stt-corp-hero-card">
+              <h1 class="stt-corp-hero-title">Leading the future of wealth</h1>
+              <p class="stt-corp-hero-desc">
+                State Street Wealth Services is providing wealth management firms and advisors the freedom to move forward with a digital-native solution built for scale, flexibility, and growth.
+              </p>
+              <button class="stt-corp-btn-solid" onclick="togglePortalChat(true)">Learn more</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: In focus (Contained & Centered) -->
+      <section class="stt-corp-section">
+        <div class="stt-container">
+          <div class="stt-corp-grid">
+            <div class="stt-corp-col-label">
+              <h2 class="stt-corp-section-heading">In focus</h2>
+            </div>
+            <div class="stt-corp-col-image">
+              <img src="/sibos-2026-hero-image.jpg" alt="State Street at Sibos 2026" class="stt-corp-img">
+            </div>
+            <div class="stt-corp-col-content">
+              <h3 class="stt-corp-item-title">State Street at Sibos 2026</h3>
+              <p class="stt-corp-item-desc">
+                At this year’s Sibos conference, we’re engaging in the industry’s most critical conversations, exploring how AI is accelerating innovation across global finance.
+              </p>
+              <button class="stt-corp-btn-outline" onclick="togglePortalChat(true)">Learn more</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="stt-container">
+        <hr class="stt-corp-divider">
+      </div>
+
+      <!-- Section: Our capabilities (Contained & Centered) -->
+      <section class="stt-corp-section">
+        <div class="stt-container">
+          <div class="stt-corp-grid">
+            <div class="stt-corp-col-label">
+              <h2 class="stt-corp-section-heading">Our capabilities</h2>
+            </div>
+            <div class="stt-corp-col-image">
+              <img src="/solutions-designed-around-you.jpg" alt="Investment Servicing" class="stt-corp-img">
+            </div>
+            <div class="stt-corp-col-content">
+              <h3 class="stt-corp-item-title">Investment Servicing</h3>
+              <p class="stt-corp-item-desc">
+                Our integrated, scalable asset servicing solutions are grounded in decades of global expertise in custody, accounting, and administration across asset classes and 100+ markets — helping our clients unlock growth and create efficiency and resilience in a shifting investment landscape.
+              </p>
+              <button class="stt-corp-btn-outline" onclick="togglePortalChat(true)">Learn more</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ======================================================================
+         TAB: OPERATIONS (SEPARATE DEDICATED WORKSPACE)
+         ====================================================================== -->
+    <div id="tab-operations" style="display: none;">
       <!-- Hero Banner -->
       <section class="ssmp-enhanced-hero">
         <div class="stt-container">
@@ -1992,51 +2539,75 @@
     </div>
 
     <!-- ======================================================================
-         TAB 2: AI CHAT ASSISTANT (CHAT WIDGET EMBED CONTAINER)
+         FLOATING CORNER AI CHAT WIDGET & LAUNCHER (TARA)
          ====================================================================== -->
-    <div id="tab-chat">
-      <div class="stt-container">
-        <div class="chat-layout">
-        <!-- Main Chat Widget Embed Surface -->
-        <div class="chat-widget-card" id="ces-chat-widget-container">
-          <div class="chat-widget-header">
-            <div class="chat-agent-info">
-              <div class="chat-agent-avatar">T</div>
-              <div>
-                <div class="chat-agent-title">Tara — Transfer Agency Virtual Specialist</div>
-                <div class="chat-agent-subtitle">Google Customer Engagement Suite (CES) • Audio / Chat Bidi Pipe</div>
-              </div>
-            </div>
-            <div style="display: flex; align-items: center; gap: 0.85rem;">
-              <label class="stt-switch" title="Toggle Developer Trace: OpenAPI requests, responses, and agent handoffs">
-                <input type="checkbox" id="debug-trace-toggle" onchange="toggleDebugMode(this.checked)">
-                <span class="stt-slider"></span>
-                <span class="stt-switch-label">Developer Trace</span>
-              </label>
-              <button type="button" class="btn-reset-chat" onclick="resetChatSession()" title="Start a fresh session with Tara" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 5px 12px; font-size: 0.75rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.35rem; border-radius: 4px; transition: background 0.15s ease;">
-                <span>🔄</span> New Chat Session
-              </button>
-            </div>
-          </div>
+    <!-- Launcher FAB -->
+    <button id="portal-chat-launcher" class="portal-chat-launcher" onclick="togglePortalChat()" title="Chat with Tara (Virtual Specialist)">
+      <div class="portal-chat-badge"></div>
+      <svg class="launcher-icon" viewBox="0 0 24 24">
+        <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/>
+      </svg>
+      <span class="launcher-close-icon">×</span>
+    </button>
 
-          <!-- Chat Conversation Log -->
-          <div class="chat-messages-container" id="chat-stream">
-            <div class="chat-bubble bubble-agent">
-              Hello! I'm Tara, your State Street Transfer Agency Virtual Assistant powered by Google Cloud CES. 
-              I can assist with investor authentication, deal ticket inquiries, exception queues, and settlement cash reconciliation. How can I help you today?
-              <div class="bubble-meta"><span>Tara (CES Agent)</span> • <span>Just now</span></div>
-            </div>
+    <!-- Corner Dialog Window -->
+    <div id="portal-chat-widget" class="portal-chat-window">
+      <div class="portal-chat-header">
+        <div class="portal-chat-header-info">
+          <div class="portal-chat-avatar">
+            T
+            <div class="portal-chat-avatar-dot"></div>
           </div>
-
-          <!-- Chat Input Bar -->
-          <form class="chat-input-bar" onsubmit="handleSendChat(event)">
-            <input type="text" id="chat-user-input" class="chat-text-input" placeholder="Type a message or inquiry to Tara..." autocomplete="off">
-            <button type="submit" class="btn-send-chat">Send Message</button>
-          </form>
+          <div class="portal-chat-title-group">
+            <div class="portal-chat-title">Tara — Virtual Specialist</div>
+            <div class="portal-chat-subtitle">Transfer Agency</div>
+          </div>
+        </div>
+        <div class="portal-chat-header-actions">
+          <label class="stt-switch" title="Toggle Developer Trace: OpenAPI requests, responses, and agent handoffs">
+            <input type="checkbox" id="debug-trace-toggle" onchange="toggleDebugMode(this.checked)">
+            <span class="stt-slider"></span>
+            <span class="stt-switch-label">Trace</span>
+          </label>
+          <button type="button" class="portal-chat-head-btn" onclick="resetChatSession()" title="Start a fresh session with Tara">
+            <span>🔄</span>
+          </button>
+          <button type="button" class="portal-chat-close-btn" onclick="togglePortalChat(false)" title="Minimize chat">
+            ✕
+          </button>
         </div>
       </div>
+
+
+      <!-- Chat Messages Stream -->
+      <div class="chat-messages-container" id="chat-stream">
+        <div class="chat-bubble bubble-agent">
+          Hi, this is State Street Treasury Advisory. How can I assist you with your account today?
+        </div>
+      </div>
+
+      <!-- File Attachment Preview Bar (shown when file is selected) -->
+      <div id="portal-attachment-preview" class="portal-attachment-preview">
+        <div class="attachment-chip">
+          <span class="attachment-chip-icon">📎</span>
+          <span id="attachment-chip-name" class="attachment-chip-name">filename.pdf</span>
+          <span id="attachment-chip-size" class="attachment-chip-size">(0 KB)</span>
+          <button type="button" class="attachment-chip-remove" onclick="clearSelectedAttachment()" title="Remove attachment">✕</button>
+        </div>
+      </div>
+
+      <!-- Chat Input Form with Upload Button -->
+      <form class="portal-chat-input-bar" onsubmit="handleSendChat(event)">
+        <input type="file" id="portal-file-input" style="display:none;" onchange="handleFileSelected(this)">
+        <button type="button" class="btn-portal-attach" onclick="triggerFileInput()" title="Attach document, trade confirmation, or PDF">
+          📎
+        </button>
+        <input type="text" id="chat-user-input" class="portal-chat-input" placeholder="Ask Tara or attach a file..." autocomplete="off">
+        <button type="submit" class="btn-portal-send">Send</button>
+      </form>
     </div>
-  </div>
+
+
 
     <!-- Corporate Footer -->
     <footer>
@@ -2055,7 +2626,7 @@
             </div>
           </div>
           <div class="ssmp-footer-bottom">
-            <div>© 2026 State Street Corporation. All rights reserved. Transfer Agency AI Contact Center powered by Google Cloud CES.</div>
+            <div>© 2026 State Street Corporation. All rights reserved. Transfer Agency Operations & Portal.</div>
             <div>Firestore Database: <code>statestreet</code> (nam5)</div>
           </div>
         </div>
@@ -2167,7 +2738,7 @@
         document.getElementById('app-view').style.display = 'flex';
         document.getElementById('active-user-badge').innerText = `Operator: ${currentUser}`;
         loadAllData();
-        switchMainTab('chat');
+        switchMainTab('home');
       } else {
         document.getElementById('login-view').style.display = 'flex';
         document.getElementById('app-view').style.display = 'none';
@@ -2201,20 +2772,28 @@
     }
 
     // ========================================================================
-    // TOP LEVEL TABS: Operations vs AI Chat
+    // TOP LEVEL TABS: State Street Corporate Home vs Operations Workspace
     // ========================================================================
     function switchMainTab(tab) {
       document.querySelectorAll('.ssmp-nav-tab-btn').forEach(btn => btn.classList.remove('active'));
-      document.getElementById('tab-operations').style.display = 'none';
-      document.getElementById('tab-chat').style.display = 'none';
+      const homeTab = document.getElementById('tab-home');
+      const opTab = document.getElementById('tab-operations');
 
-      if (tab === 'operations') {
-        document.getElementById('nav-btn-operations').classList.add('active');
-        document.getElementById('tab-operations').style.display = 'block';
+      if (tab === 'home') {
+        const homeBtn = document.getElementById('nav-btn-home');
+        if (homeBtn) homeBtn.classList.add('active');
+        if (homeTab) homeTab.style.display = 'block';
+        if (opTab) opTab.style.display = 'none';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (tab === 'operations') {
+        const opBtn = document.getElementById('nav-btn-operations');
+        if (opBtn) opBtn.classList.add('active');
+        if (homeTab) homeTab.style.display = 'none';
+        if (opTab) opTab.style.display = 'block';
         renderTable();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       } else if (tab === 'chat') {
-        document.getElementById('nav-btn-chat').classList.add('active');
-        document.getElementById('tab-chat').style.display = 'block';
+        togglePortalChat(true);
       }
     }
 
@@ -2236,7 +2815,8 @@
         rawData['bank-rec'] = brec;
 
         const total = accs.length + trds.length + wis.length + brec.length;
-        document.getElementById('badge-total-records').innerText = `${total} Records`;
+        const totalBadge = document.getElementById('badge-total-records');
+        if (totalBadge) totalBadge.innerText = `${total} Records`;
 
         document.getElementById('count-accounts').innerText = accs.length;
         document.getElementById('count-trades').innerText = trds.length;
@@ -2474,7 +3054,7 @@
     function toggleDebugMode(checked) {
       isDebugMode = checked;
       sessionStorage.setItem('stt_debug_trace', checked ? 'true' : 'false');
-      const container = document.getElementById('ces-chat-widget-container');
+      const container = document.getElementById('portal-chat-widget');
       if (container) {
         if (checked) {
           container.classList.add('debug-mode-active');
@@ -2491,7 +3071,7 @@
     function initDebugMode() {
       const toggle = document.getElementById('debug-trace-toggle');
       if (toggle) toggle.checked = isDebugMode;
-      const container = document.getElementById('ces-chat-widget-container');
+      const container = document.getElementById('portal-chat-widget');
       if (container && isDebugMode) {
         container.classList.add('debug-mode-active');
       }
@@ -2510,18 +3090,99 @@
       if (document.getElementById('tel-latency')) document.getElementById('tel-latency').innerText = '—';
       if (document.getElementById('tel-tool')) document.getElementById('tel-tool').innerText = 'None';
       
+      clearSelectedAttachment();
       const stream = document.getElementById('chat-stream');
       stream.innerHTML = `
         <div class="chat-bubble bubble-agent">
-          Hello! I'm Tara, your State Street Transfer Agency Virtual Assistant powered by Google Cloud CES. 
-          I can assist with investor authentication, deal ticket inquiries, exception queues, and settlement cash reconciliation. How can I help you today?
-          <div class="bubble-meta"><span>Tara (CES Agent)</span> • <span>Just now</span></div>
+          Hi, this is State Street Treasury Advisory. How can I assist you with your account today?
         </div>
       `;
       showToast("Started fresh conversational session.");
     }
 
+    // ========================================================================
+    // FLOATING CORNER CHAT CONTROLS & FILE UPLOADS
+    // ========================================================================
+    let isPortalChatOpen = false;
+    let currentAttachment = null;
+
+    function togglePortalChat(forceState) {
+      const widget = document.getElementById('portal-chat-widget');
+      const launcher = document.getElementById('portal-chat-launcher');
+      if (!widget || !launcher) return;
+
+      if (typeof forceState === 'boolean') {
+        isPortalChatOpen = forceState;
+      } else {
+        isPortalChatOpen = !isPortalChatOpen;
+      }
+
+      if (isPortalChatOpen) {
+        widget.classList.add('is-open');
+        launcher.classList.add('is-open');
+        setTimeout(() => {
+          const input = document.getElementById('chat-user-input');
+          if (input) input.focus();
+        }, 200);
+      } else {
+        widget.classList.remove('is-open');
+        launcher.classList.remove('is-open');
+      }
+    }
+
+    function triggerFileInput() {
+      const fileInput = document.getElementById('portal-file-input');
+      if (fileInput) fileInput.click();
+    }
+
+    function handleFileSelected(input) {
+      if (!input.files || input.files.length === 0) return;
+      const file = input.files[0];
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        currentAttachment = {
+          filename: file.name,
+          size: file.size,
+          sizeFormatted: formatFileSize(file.size),
+          content_type: file.type || 'application/octet-stream',
+          file_data: e.target.result
+        };
+        renderAttachmentPreview();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function formatFileSize(bytes) {
+      if (!bytes || bytes < 1024) return (bytes || 0) + ' B';
+      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+    }
+
+    function renderAttachmentPreview() {
+      const previewBar = document.getElementById('portal-attachment-preview');
+      const nameEl = document.getElementById('attachment-chip-name');
+      const sizeEl = document.getElementById('attachment-chip-size');
+      if (!previewBar || !nameEl || !sizeEl) return;
+
+      if (currentAttachment) {
+        nameEl.innerText = currentAttachment.filename;
+        sizeEl.innerText = `(${currentAttachment.sizeFormatted})`;
+        previewBar.classList.add('active');
+      } else {
+        previewBar.classList.remove('active');
+      }
+    }
+
+    function clearSelectedAttachment() {
+      currentAttachment = null;
+      const fileInput = document.getElementById('portal-file-input');
+      if (fileInput) fileInput.value = '';
+      renderAttachmentPreview();
+    }
+
     function injectPrompt(text) {
+      togglePortalChat(true);
       const input = document.getElementById('chat-user-input');
       input.value = text;
       input.focus();
@@ -2531,22 +3192,66 @@
     async function handleSendChat(e) {
       if (e && e.preventDefault) e.preventDefault();
       const input = document.getElementById('chat-user-input');
-      const text = input.value.trim();
-      if (!text) return;
+      let text = input.value.trim();
+      const attachedFile = currentAttachment;
 
-      appendChatMessage('user', text);
+      if (!text && !attachedFile) return;
+
+      if (!text && attachedFile) {
+        text = `Attached document: ${attachedFile.filename}`;
+      }
+
+      // Render user message with attachment preview if present
+      let displayHtml = escapeHtml(text).replace(/\n/g, '<br>');
+      if (attachedFile) {
+        displayHtml = `
+          <div class="chat-file-attachment">
+            <span style="font-size: 1.1rem;">📄</span>
+            <div>
+              <div style="font-weight: 700;">${escapeHtml(attachedFile.filename)}</div>
+              <div style="font-size: 0.7rem; opacity: 0.85;">${escapeHtml(attachedFile.sizeFormatted)} • Uploaded Document</div>
+            </div>
+          </div>
+          <div>${displayHtml}</div>
+        `;
+      }
+
+      appendChatMessageHtml('user', displayHtml);
       input.value = '';
+      clearSelectedAttachment();
 
       showTypingIndicator();
       const startTime = performance.now();
 
       try {
+        // Upload file to server in background if attached
+        if (attachedFile) {
+          try {
+            await fetch('/api/upload', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                filename: attachedFile.filename,
+                content_type: attachedFile.content_type,
+                file_data: attachedFile.file_data,
+                size: attachedFile.size
+              })
+            });
+          } catch (upErr) {
+            console.warn('Upload error:', upErr);
+          }
+        }
+
+        const chatPrompt = attachedFile 
+          ? `[User attached document: ${attachedFile.filename}] ${text}`
+          : text;
+
         const response = await fetch('/api/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             session_id: currentChatSessionId,
-            message: text
+            message: chatPrompt
           })
         });
 
@@ -2561,14 +3266,12 @@
         const data = await response.json();
         const latency = Math.round(performance.now() - startTime);
 
-        // Update active session ID if server assigned/returned one
         if (data.session_id) {
           currentChatSessionId = data.session_id;
           sessionStorage.setItem('ces_session_id', currentChatSessionId);
           if (document.getElementById('tel-session')) document.getElementById('tel-session').innerText = currentChatSessionId;
         }
 
-        // Render agent transfer / handoff if occurred (toggleable in trace mode)
         if (data.transfer) {
           appendTransferNotice(data.transfer);
           if (document.getElementById('tel-journey')) document.getElementById('tel-journey').innerText = data.transfer;
@@ -2576,39 +3279,25 @@
           if (document.getElementById('tel-journey')) document.getElementById('tel-journey').innerText = data.agent;
         }
 
-        // Render OpenAPI tool requests if occurred (toggleable in trace mode)
         if (data.tool_calls && data.tool_calls.length > 0) {
           for (const tc of data.tool_calls) {
             appendToolCallNotice(tc);
-            if (document.getElementById('tel-tool')) document.getElementById('tel-tool').innerText = tc.tool;
-            if (tc.args && tc.args.account_no) {
-              if (document.getElementById('tel-account')) document.getElementById('tel-account').innerText = tc.args.account_no;
-            }
-            if (tc.tool && (tc.tool.includes('validate_otp') || tc.tool.includes('validate'))) {
-              if (document.getElementById('tel-mfa')) {
-                document.getElementById('tel-mfa').innerText = 'Verified (MFA Validated)';
-                document.getElementById('tel-mfa').style.color = '#1a6e55';
-              }
-            }
+            if (document.getElementById('tel-tool')) document.getElementById('tel-tool').innerText = tc.tool || 'Tool Call';
           }
         }
 
-        // Render OpenAPI tool responses if occurred (toggleable in trace mode)
         if (data.tool_responses && data.tool_responses.length > 0) {
           for (const tr of data.tool_responses) {
             appendToolResponseNotice(tr);
           }
         }
 
-        // Update telemetry
         if (document.getElementById('tel-latency')) {
           document.getElementById('tel-latency').innerText = `${data.latency_ms || latency} ms`;
         }
 
-        // Render agent reply
         appendChatMessage('agent', data.reply, data.agent);
 
-        // Render Agent Assist Warm Transfer Dossier if escalation occurred
         if (data.handoff_dossier) {
           appendHandoffDossierCard(data.handoff_dossier);
         }
@@ -2638,10 +3327,12 @@
       const stream = document.getElementById('chat-stream');
       const toolDiv = document.createElement('div');
       toolDiv.className = 'bubble-tool debug-trace';
-      const argsStr = JSON.stringify(tc.args, null, 2);
+      const toolName = tc.tool || tc.name || 'Tool Call';
+      const toolArgs = tc.args || tc.input || tc.arguments || {};
+      const argsStr = JSON.stringify(toolArgs, null, 2);
       toolDiv.innerHTML = `
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 0.35rem;">
-          <span style="font-weight:700; color: #b45309; font-size:0.78rem;">⚡ OpenAPI Tool Request: <code>${escapeHtml(tc.tool)}</code></span>
+          <span style="font-weight:700; color: #b45309; font-size:0.78rem;">⚡ OpenAPI Tool Request: <code>${escapeHtml(toolName)}</code></span>
           <span style="font-size:0.68rem; background:#fef3c7; color:#92400e; padding:2px 6px; border-radius:3px; font-weight:600;">HTTP Request</span>
         </div>
         <pre style="font-size:0.75rem; margin:0; overflow-x:auto; background: #fffdf5; border:1px solid #fef3c7; padding: 6px 10px; border-radius: 4px; font-family:monospace; color:#334155;">${escapeHtml(argsStr)}</pre>
@@ -2654,10 +3345,12 @@
       const stream = document.getElementById('chat-stream');
       const respDiv = document.createElement('div');
       respDiv.className = 'bubble-tool-response debug-trace';
-      const respStr = JSON.stringify(tr.response, null, 2);
+      const respName = tr.tool || tr.name || 'Tool Response';
+      const respData = tr.response !== undefined ? tr.response : (tr.output !== undefined ? tr.output : tr);
+      const respStr = JSON.stringify(respData, null, 2);
       respDiv.innerHTML = `
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 0.35rem;">
-          <span style="font-weight:700; color: #166534; font-size:0.78rem;">📥 OpenAPI Tool Response: <code>${escapeHtml(tr.tool)}</code></span>
+          <span style="font-weight:700; color: #166534; font-size:0.78rem;">📥 OpenAPI Tool Response: <code>${escapeHtml(respName)}</code></span>
           <span style="font-size:0.68rem; background:#dcfce7; color:#15803d; padding:2px 6px; border-radius:3px; font-weight:600;">Status: 200 OK</span>
         </div>
         <pre style="font-size:0.75rem; margin:0; overflow-x:auto; background: #f7fee7; border:1px solid #dcfce7; padding: 6px 10px; border-radius: 4px; font-family:monospace; color:#334155;">${escapeHtml(respStr)}</pre>
@@ -2707,178 +3400,20 @@
       return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
 
-    function appendChatMessage(sender, text, agentName) {
+    function appendChatMessageHtml(sender, innerHtml, agentName) {
       const stream = document.getElementById('chat-stream');
+      if (!stream) return;
       const bubble = document.createElement('div');
       bubble.className = `chat-bubble bubble-${sender}`;
-      let senderLabel = `Operator (${currentUser || 'admin'})`;
-      if (sender === 'agent') {
-        senderLabel = agentName ? `Tara (${agentName})` : 'Tara (CES Agent)';
-      }
-      
-      // Basic markdown bold replacement
-      let formattedText = escapeHtml(text).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-      bubble.innerHTML = `${formattedText.replace(/\n/g, '<br>')}<div class="bubble-meta"><span>${senderLabel}</span> • <span>${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span></div>`;
+      bubble.innerHTML = innerHtml;
       stream.appendChild(bubble);
       stream.scrollTop = stream.scrollHeight;
     }
 
-    // ========================================================================
-    // DEMO TEST SCRIPTS DRAWER (Vanguard Pattern)
-    // ========================================================================
-    const DEMO_SCRIPTS = [
-      {
-        title: 'Cross-Account Recovery',
-        icon: '🛡️',
-        badge: 'Security Lock',
-        badgeClass: 'badge-red',
-        prompt: '"What is the status of trade TRD-5005?"',
-        turns: [
-          { text: 'My account number is ACC-1001' },
-          { text: '123456' },
-          { text: 'What is the status of trade TRD-5005?' }
-        ]
-      },
-      {
-        title: 'Executed Trade Status',
-        icon: '📈',
-        badge: 'ZILO Works Core',
-        badgeClass: 'badge-blue',
-        prompt: '"Can you check the execution status of trade TRD-5001?"',
-        turns: [
-          { text: 'My account number is ACC-1001' },
-          { text: '123456' },
-          { text: 'Can you check the execution status of trade TRD-5001?' }
-        ]
-      },
-      {
-        title: 'Intake Queue (DINDEX)',
-        icon: '📋',
-        badge: 'Document Intake',
-        badgeClass: 'badge-slate',
-        prompt: '"Where is my order TRD-5003? Has it been processed yet?"',
-        turns: [
-          { text: 'My account number is ACC-1001' },
-          { text: '123456' },
-          { text: 'Where is my order TRD-5003? Has it been processed yet?' }
-        ]
-      },
-      {
-        title: 'NIGO Signature Review',
-        icon: '⚠️',
-        badge: 'Investor Services',
-        badgeClass: 'badge-amber',
-        prompt: '"Please check the status of trade TRD-5004"',
-        turns: [
-          { text: 'My account number is ACC-1001' },
-          { text: '123456' },
-          { text: 'Please check the status of trade TRD-5004' }
-        ]
-      },
-      {
-        title: 'Monies Received & Settled',
-        icon: '💰',
-        badge: 'Bank Rec Matched',
-        badgeClass: 'badge-green',
-        prompt: '"Did the funds arrive for trade TRD-5010?"',
-        turns: [
-          { text: 'My account number is ACC-1001' },
-          { text: '123456' },
-          { text: 'Did the funds arrive for trade TRD-5010?' }
-        ]
-      },
-      {
-        title: 'Overdue Monies (SUBNR)',
-        icon: '🚨',
-        badge: 'Cash Management',
-        badgeClass: 'badge-purple',
-        prompt: '"What is the settlement status of trade TRD-5012?"',
-        turns: [
-          { text: 'My account number is ACC-1001' },
-          { text: '123456' },
-          { text: 'What is the settlement status of trade TRD-5012?' }
-        ]
-      },
-      {
-        title: '2-Clue Privacy Gate',
-        icon: '🔒',
-        badge: 'Privacy Gate',
-        badgeClass: 'badge-pink',
-        prompt: '"I placed a trade for $500,000 last week, can you check on it?"',
-        turns: [
-          { text: 'My account number is ACC-1001' },
-          { text: '123456' },
-          { text: 'I placed a trade for $500,000 last week, can you check on it?' },
-          { text: 'It was a Subscription for Global Growth Class A on September 18th' }
-        ]
-      },
-      {
-        title: 'Trade Not Found Help',
-        icon: '❓',
-        badge: 'Recovery Help',
-        badgeClass: 'badge-slate',
-        prompt: '"What is the status of trade TRD-9999?"',
-        turns: [
-          { text: 'My account number is ACC-1001' },
-          { text: '123456' },
-          { text: 'What is the status of trade TRD-9999?' }
-        ]
-      }
-    ];
-
-    // Hover & Click activation for Sample Transcripts Drawer
-    let drawerCloseTimer = null;
-
-    function openTranscriptDrawer() {
-      if (drawerCloseTimer) clearTimeout(drawerCloseTimer);
-      const drawer = document.getElementById('demo-scripts-drawer');
-      if (drawer) drawer.classList.add('open');
-    }
-
-    function closeTranscriptDrawer(immediate = false) {
-      if (drawerCloseTimer) clearTimeout(drawerCloseTimer);
-      if (immediate) {
-        const drawer = document.getElementById('demo-scripts-drawer');
-        if (drawer) drawer.classList.remove('open');
-      } else {
-        drawerCloseTimer = setTimeout(() => {
-          const drawer = document.getElementById('demo-scripts-drawer');
-          if (drawer) drawer.classList.remove('open');
-        }, 260);
-      }
-    }
-
-    function toggleTranscriptDrawer(e) {
-      const ev = e || window.event;
-      if (ev && ev.stopPropagation) ev.stopPropagation();
-      if (drawerCloseTimer) clearTimeout(drawerCloseTimer);
-      const drawer = document.getElementById('demo-scripts-drawer');
-      if (drawer) {
-        drawer.classList.toggle('open');
-      }
-    }
-
-    function initTranscriptDrawerHover() {
-      const drawer = document.getElementById('demo-scripts-drawer');
-      const tabBtn = document.getElementById('floating-script-drawer-btn');
-      if (tabBtn) {
-        tabBtn.addEventListener('mouseenter', openTranscriptDrawer);
-        tabBtn.addEventListener('mouseleave', () => closeTranscriptDrawer(false));
-      }
-      if (drawer) {
-        drawer.addEventListener('mouseenter', openTranscriptDrawer);
-        drawer.addEventListener('mouseleave', () => closeTranscriptDrawer(false));
-      }
-
-      // Close drawer when clicking outside
-      document.addEventListener('click', (e) => {
-        const d = document.getElementById('demo-scripts-drawer');
-        const b = document.getElementById('floating-script-drawer-btn');
-        if (!d || !d.classList.contains('open')) return;
-        if (!d.contains(e.target) && (!b || !b.contains(e.target))) {
-          d.classList.remove('open');
-        }
-      });
+    function appendChatMessage(sender, text, agentName) {
+      let formattedText = escapeHtml(text).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      formattedText = formattedText.replace(/\n/g, '<br>');
+      appendChatMessageHtml(sender, formattedText, agentName);
     }
 
     function showToast(msg) {
@@ -2891,185 +3426,6 @@
     // Initialize
     checkAuth();
     initDebugMode();
-    initTranscriptDrawerHover();
   </script>
-
-  <!-- ========================================================================= -->
-  <!-- DEMO SCRIPTS & TEST PROMPTS DRAWER (Left Slide-out Panel)                 -->
-  <!-- ========================================================================= -->
-  <div id="demo-scripts-drawer" class="demo-scripts-drawer">
-    <!-- Drawer Header -->
-    <div class="demo-scripts-header">
-      <div style="display: flex; align-items: center; gap: 8px;">
-        <span style="font-size: 15px; color: #facc15;">💬</span>
-        <h3 style="font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin: 0; color: #ffffff;">SAMPLE TRANSCRIPTS FOR TESTING</h3>
-      </div>
-      <button type="button" class="btn-drawer-close" onclick="closeTranscriptDrawer(true)" title="Close transcripts drawer" aria-label="Close transcripts drawer">✕</button>
-    </div>
-
-    <!-- Subtitle Guide -->
-    <div style="padding: 10px 14px; background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
-      <p style="font-size: 11px; color: #475569; margin: 0; font-weight: 600;">Click or hover reference guide for manual chat testing with Tara:</p>
-      <p style="font-size: 10px; color: #94a3b8; margin: 2px 0 0 0;">Click tab/outside or move mouse away to close • Copy/paste or type prompts to test</p>
-    </div>
-
-    <!-- Script Items Feed (Pre-rendered Sample Transcripts, No Clicks) -->
-    <div class="demo-scripts-feed" id="demo-scripts-feed">
-      <!-- Scenario 1: Executed Trade -->
-      <div class="script-prompt-card">
-        <div class="script-card-header">
-          <span class="script-card-title"><span>📈</span> Executed Trade Status</span>
-          <span class="script-badge badge-blue">ZILO Works Core</span>
-        </div>
-        <div class="transcript-dialogue">
-          <div class="transcript-turn turn-caller">
-            <span class="transcript-speaker">👤 Caller</span>
-            <span class="transcript-text">"Can you check the execution status of trade TRD-5001?"</span>
-          </div>
-          <div class="transcript-turn turn-tara">
-            <span class="transcript-speaker">🤖 Tara</span>
-            <span class="transcript-text">"Trade TRD-5001 for Global Growth Fund A was executed on Sept 18 for $1,250,000 USD. Status is Processed."</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Scenario 2: Pending Trade Ingestion -->
-      <div class="script-prompt-card">
-        <div class="script-card-header">
-          <span class="script-card-title"><span>⏳</span> Pending Trade Ingestion</span>
-          <span class="script-badge badge-amber">Order Intake</span>
-        </div>
-        <div class="transcript-dialogue">
-          <div class="transcript-turn turn-caller">
-            <span class="transcript-speaker">👤 Caller</span>
-            <span class="transcript-text">"Is trade TRD-5002 pending or confirmed?"</span>
-          </div>
-          <div class="transcript-turn turn-tara">
-            <span class="transcript-speaker">🤖 Tara</span>
-            <span class="transcript-text">"Trade TRD-5002 for $850,000 USD is currently Pending confirmation from the executing broker."</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Scenario 3: Intake Queue (DINDEX) -->
-      <div class="script-prompt-card">
-        <div class="script-card-header">
-          <span class="script-card-title"><span>📋</span> Intake Queue (DINDEX)</span>
-          <span class="script-badge badge-slate">Document Intake</span>
-        </div>
-        <div class="transcript-dialogue">
-          <div class="transcript-turn turn-caller">
-            <span class="transcript-speaker">👤 Caller</span>
-            <span class="transcript-text">"Where is my order TRD-5003? Has it been processed yet?"</span>
-          </div>
-          <div class="transcript-turn turn-tara">
-            <span class="transcript-speaker">🤖 Tara</span>
-            <span class="transcript-text">"Trade TRD-5003 is currently in the Document Indexing (DINDEX) intake queue with a same-day SLA for processing."</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Scenario 4: NIGO Signature Review -->
-      <div class="script-prompt-card">
-        <div class="script-card-header">
-          <span class="script-card-title"><span>⚠️</span> NIGO Signature Review</span>
-          <span class="script-badge badge-amber">Investor Services</span>
-        </div>
-        <div class="transcript-dialogue">
-          <div class="transcript-turn turn-caller">
-            <span class="transcript-speaker">👤 Caller</span>
-            <span class="transcript-text">"Please check the status of trade TRD-5004"</span>
-          </div>
-          <div class="transcript-turn turn-tara">
-            <span class="transcript-speaker">🤖 Tara</span>
-            <span class="transcript-text">"Trade TRD-5004 is flagged as NIGO due to missing required authorized signatures. Would you like me to connect you with Investor Services?"</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Scenario 5: Monies Received & Settled -->
-      <div class="script-prompt-card">
-        <div class="script-card-header">
-          <span class="script-card-title"><span>💰</span> Monies Received & Settled</span>
-          <span class="script-badge badge-green">Bank Rec Matched</span>
-        </div>
-        <div class="transcript-dialogue">
-          <div class="transcript-turn turn-caller">
-            <span class="transcript-speaker">👤 Caller</span>
-            <span class="transcript-text">"Did the funds arrive for trade TRD-5010?"</span>
-          </div>
-          <div class="transcript-turn turn-tara">
-            <span class="transcript-speaker">🤖 Tara</span>
-            <span class="transcript-text">"Yes, full settlement monies of $2,000,000 USD have been received and reconciled against Bank Reconciliation. The trade is fully settled."</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Scenario 6: Overdue Monies (SUBNR) -->
-      <div class="script-prompt-card">
-        <div class="script-card-header">
-          <span class="script-card-title"><span>🚨</span> Overdue Monies (SUBNR)</span>
-          <span class="script-badge badge-purple">Cash Management</span>
-        </div>
-        <div class="transcript-dialogue">
-          <div class="transcript-turn turn-caller">
-            <span class="transcript-speaker">👤 Caller</span>
-            <span class="transcript-text">"What is the settlement status of trade TRD-5012?"</span>
-          </div>
-          <div class="transcript-turn turn-tara">
-            <span class="transcript-speaker">🤖 Tara</span>
-            <span class="transcript-text">"Monies of $3,500,000 USD for trade TRD-5012 are overdue at Settlement Date + 1 with active SUBNR exception flag. Routing to Cash Management."</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Scenario 7: Cross-Account Recovery Guardrail -->
-      <div class="script-prompt-card">
-        <div class="script-card-header">
-          <span class="script-card-title"><span>🛡️</span> Cross-Account Security Lock</span>
-          <span class="script-badge badge-red">Security Lock</span>
-        </div>
-        <div class="transcript-dialogue">
-          <div class="transcript-turn turn-caller">
-            <span class="transcript-speaker">👤 Caller</span>
-            <span class="transcript-text">"What is the status of trade TRD-5005?"</span>
-          </div>
-          <div class="transcript-turn turn-tara">
-            <span class="transcript-speaker">🤖 Tara</span>
-            <span class="transcript-text">"Trade TRD-5005 does not belong to your authenticated account ACC-1001. Could you please verify the reference, or is there another trade I can check?"</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Scenario 8: Trade Not Found Fallback -->
-      <div class="script-prompt-card">
-        <div class="script-card-header">
-          <span class="script-card-title"><span>❓</span> Trade Not Found Fallback</span>
-          <span class="script-badge badge-slate">Recovery Help</span>
-        </div>
-        <div class="transcript-dialogue">
-          <div class="transcript-turn turn-caller">
-            <span class="transcript-speaker">👤 Caller</span>
-            <span class="transcript-text">"What is the status of trade TRD-9999?"</span>
-          </div>
-          <div class="transcript-turn turn-tara">
-            <span class="transcript-speaker">🤖 Tara</span>
-            <span class="transcript-text">"We could not locate trade TRD-9999 on your account in ZILO Works or intake queues. Could you please double check the reference number?"</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Drawer Footer -->
-    <div class="demo-scripts-footer">
-      💡 Hover to read • Select text to copy • Type prompts into chat to test
-    </div>
-  </div>
-
-  <!-- Sticky Floating Tab on Left Edge of Screen -->
-  <div id="floating-script-drawer-btn" class="floating-script-btn" title="Click or hover to view Sample Transcripts for Testing" onclick="toggleTranscriptDrawer()">
-    <span class="floating-script-icon">💬</span>
-    <span class="floating-script-text">SAMPLE TRANSCRIPTS FOR TESTING</span>
-  </div>
 </body>
 </html>

@@ -29,6 +29,9 @@ GECX_Mock_Data_Authentication_1.xlsx
 Recommended_Top_Customer_Journeys_POC_Updated_09.14.2026.docx
 Top10_Questions_V2.pdf
 
+# All Markdown documents (SOPs, guides, transcripts, evals, notes)
+*.md
+
 # Credentials, secret keys, tokens & logs
 *.key
 *.pem
