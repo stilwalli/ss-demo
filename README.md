@@ -1,18 +1,18 @@
-# State Street Institutional Transfer Agency AI Contact Center
+# Institutional Transfer Agency AI Contact Center
 
-Unified project workspace for the State Street GECX / Customer Engagement Suite (CES) Conversational AI solution, operational FastAPI backend, and corporate web portal.
+Unified project workspace for the Transfer Agency GECX / Customer Engagement Suite (CES) Conversational AI solution, operational FastAPI backend, and corporate web portal.
 
 ---
 
 ## 📁 Repository Structure
 
 ```text
-statestreet/
+ss-demo/
 ├── README.md                                             # Master project overview, architecture & quickstart
 ├── .gitignore                                            # Client data, mock tables & credential exclusions
 │
 ├── agent/                                                # Live CES / GECX Agent Definitions & Instructions
-│   ├── chat_agent/                                       # StateStreetGECXDemo (Web & Chat Deployment)
+│   ├── chat_agent/                                       # GECX Chat Demo App (Web & Chat Deployment)
 │   │   ├── app.json                                      # Global app config, logging & model settings
 │   │   ├── deployments.json                              # Active deployments (Voice_0.1, Web Channel)
 │   │   ├── agents/                                       # Prompts & agent JSON specifications
@@ -25,7 +25,7 @@ statestreet/
 │   │       ├── issue_otp_challenge.json
 │   │       ├── search_bank_rec.json
 │   │       └── validate_otp_response.json
-│   ├── voice_agent/                                      # StateStreetVoiceDemo (Telephony & Audio Deployment)
+│   ├── voice_agent/                                      # Voice Demo App (Telephony & Audio Deployment)
 │   │   ├── app.json                                      # Audio processing & telephony configs
 │   │   ├── deployments.json                              # Voice Channel deployment
 │   │   ├── agents/                                       # Voice-tuned system instructions
@@ -89,13 +89,13 @@ statestreet/
 
 ## 🤖 Deployed CES Applications
 
-1. **Chat Agent: `StateStreetGECXDemo`**
+1. **Chat Agent**
    - **Resource ID**: `projects/375460843715/locations/us/apps/954f9664-9865-4fdc-9ced-751589097442`
    - **Active Deployment**: `56962e42-84e1-4aa2-8932-a15ad9ea4e75` (`Voice_0.1`)
    - **Model**: `gemini-3.1-flash-live`
    - **Features**: Multi-agent routing (Root triage, MFA Email OTP, Deal Tickets, Receipt of Monies, and Escalation Dossiers).
 
-2. **Voice Agent: `StateStreetVoiceDemo`**
+2. **Voice Agent**
    - **Resource ID**: `projects/375460843715/locations/us/apps/db6b068d-3cc1-4fcb-82be-1d3b059db67e`
    - **Active Deployment**: `Voice Channel`
    - **Features**: Telephony-optimized voice brevity, hold music during tool calls, concise settlement summaries.
@@ -106,28 +106,28 @@ statestreet/
 
 ### 1. Running the Portal Locally
 ```bash
-cd /usr/local/google/home/stilwalli/mywork/statestreet/portal
+cd portal
 python3 server.py
 ```
 *Accessible on port 8080: `http://localhost:8080` or `http://tilwalli.c.googlers.com:8080/`*
 
 ### 2. Seeding or Resetting the Firestore Baseline
 ```bash
-cd /usr/local/google/home/stilwalli/mywork/statestreet/portal
+cd portal
 python3 seed_firestore.py
 ```
 *Populates 4 collections (`accounts`, `trades`, `work_items`, `bank_rec`) in the `statestreet` Firestore database.*
 
 ### 3. Running the FastAPI Backend Locally
 ```bash
-cd /usr/local/google/home/stilwalli/mywork/statestreet/api
+cd api
 uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 ### 4. Deploying to Google Cloud Run
 ```bash
 # Deploy Portal
-cd /usr/local/google/home/stilwalli/mywork/statestreet/portal
+cd portal
 gcloud run deploy statestreet-portal \
     --source . \
     --project gcex-contact-center-508117 \
@@ -135,7 +135,7 @@ gcloud run deploy statestreet-portal \
     --allow-unauthenticated
 
 # Deploy API Tools Backend
-cd /usr/local/google/home/stilwalli/mywork/statestreet/api
+cd api
 gcloud run deploy statestreet-api \
     --source . \
     --project gcex-contact-center-508117 \
